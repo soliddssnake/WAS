@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AppRegistration
 import androidx.compose.material.icons.filled.Login
+import androidx.compose.material.icons.filled.PersonAddAlt1
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,7 +23,7 @@ import com.ibrahimengin.was.R
 
 @Composable
 fun LoginScreen(){
-    val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark else R.drawable.was_logo_light
+    val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark  else R.drawable.was_logo_light
     var username = remember { mutableStateOf("") }
     var password = remember { mutableStateOf("") }
 
@@ -31,7 +32,7 @@ fun LoginScreen(){
             verticalArrangement = Arrangement.Center) {
             CustomImage(logo,"WAS Logo",250.dp,250.dp)
             CustomOutlinedTextField(username.value, {username.value = it}, stringResource(R.string.username))
-            PasswordField(password.value, {password.value = it}, stringResource(R.string.password))//TODO Dark temadaki sorunlar çözülecek
+            PasswordField(password.value, {password.value = it}, stringResource(R.string.password))
             Spacer(modifier = Modifier.height(5.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                 Text(stringResource(R.string.forgotPassword))//TODO clickable-onClick fonksionu eklenecek
@@ -39,7 +40,7 @@ fun LoginScreen(){
             }
             Spacer(modifier = Modifier.height(15.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-                ButtonTrailingIcon({}, stringResource(R.string.signup), Icons.Filled.AppRegistration,
+                ButtonTrailingIcon({}, stringResource(R.string.signup), Icons.Filled.PersonAddAlt1,
                     stringResource(R.string.signup), Color.Gray)//TODO onClick fonksionu eklenecek
                 ButtonTrailingIcon({}, stringResource(R.string.login), Icons.Filled.Login,
                     stringResource(R.string.login))//TODO onClick fonksionu eklenecek
