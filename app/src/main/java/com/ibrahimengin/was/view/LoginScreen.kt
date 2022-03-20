@@ -1,11 +1,11 @@
 package com.ibrahimengin.was.view
 
+import android.content.Intent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AppRegistration
 import androidx.compose.material.icons.filled.Login
 import androidx.compose.material.icons.filled.PersonAddAlt1
 import androidx.compose.runtime.Composable
@@ -14,11 +14,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.compose.WASTheme
 import com.ibrahimengin.was.R
+import com.ibrahimengin.was.RegisterActivity
 
 //ekle bakim
 @Composable
@@ -26,6 +28,8 @@ fun LoginScreen(){
     val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark  else R.drawable.was_logo_light
     var username = remember { mutableStateOf("") }
     var password = remember { mutableStateOf("") }
+    val context = LocalContext.current
+    val intent = Intent(context, RegisterActivity::class.java)
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.padding(horizontal = 5.dp), horizontalAlignment = Alignment.CenterHorizontally,
@@ -40,7 +44,7 @@ fun LoginScreen(){
             }
             Spacer(modifier = Modifier.height(15.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-                ButtonTrailingIcon({}, stringResource(R.string.signup), Icons.Filled.PersonAddAlt1,
+                ButtonTrailingIcon({context.startActivity(intent)}, stringResource(R.string.signup), Icons.Filled.PersonAddAlt1,
                     stringResource(R.string.signup), Color.Gray)//TODO onClick fonksionu eklenecek
                 ButtonTrailingIcon({}, stringResource(R.string.login), Icons.Filled.Login,
                     stringResource(R.string.login))//TODO onClick fonksionu eklenecek
