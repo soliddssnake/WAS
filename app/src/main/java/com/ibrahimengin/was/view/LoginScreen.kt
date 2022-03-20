@@ -1,5 +1,6 @@
 package com.ibrahimengin.was.view
 
+import android.app.Activity
 import android.content.Intent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
@@ -22,14 +23,14 @@ import com.example.compose.WASTheme
 import com.ibrahimengin.was.R
 import com.ibrahimengin.was.RegisterActivity
 
-//ekle bakim
 @Composable
 fun LoginScreen(){
     val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark  else R.drawable.was_logo_light
-    var username = remember { mutableStateOf("") }
-    var password = remember { mutableStateOf("") }
+    val username = remember { mutableStateOf("") }
+    val password = remember { mutableStateOf("") }
     val context = LocalContext.current
     val intent = Intent(context, RegisterActivity::class.java)
+    val activity = (LocalContext.current as? Activity)
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.padding(horizontal = 5.dp), horizontalAlignment = Alignment.CenterHorizontally,
@@ -44,8 +45,10 @@ fun LoginScreen(){
             }
             Spacer(modifier = Modifier.height(15.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-                ButtonTrailingIcon({context.startActivity(intent)}, stringResource(R.string.signup), Icons.Filled.PersonAddAlt1,
-                    stringResource(R.string.signup), Color.Gray)//TODO onClick fonksionu eklenecek
+                ButtonTrailingIcon({context.startActivity(intent)
+                                   activity?.finish()},
+                    stringResource(R.string.signup), Icons.Filled.PersonAddAlt1,
+                    stringResource(R.string.signup), Color.Gray)
                 ButtonTrailingIcon({}, stringResource(R.string.login), Icons.Filled.Login,
                     stringResource(R.string.login))//TODO onClick fonksionu eklenecek
             }
