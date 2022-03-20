@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.example.compose.WASTheme
 import com.ibrahimengin.was.R
 
-
+//ekle bakim
 @Composable
 fun LoginScreen(){
     val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark  else R.drawable.was_logo_light
