@@ -34,7 +34,7 @@ labelText: String){
 @Composable
 fun PasswordField(passwordValue: String, passwordFieldFunc: (String) -> Unit,
 labelText: String){
-    var passwordVisible= remember { mutableStateOf(false) }
+    val passwordVisible= remember { mutableStateOf(false) }
     OutlinedTextField(value = passwordValue, onValueChange = passwordFieldFunc,
     modifier = Modifier.fillMaxWidth(),
     visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
@@ -61,9 +61,8 @@ labelText: String){
 @Composable
 fun PreviewTextField(){
     WASTheme {
-        var loginUserName = remember { mutableStateOf("") }
+        val loginUserName = remember { mutableStateOf("") }
         //CustomOutlinedTextField(loginUserName.value,{if (it.length <= 50) loginUserName.value = it },"LABEL")
         PasswordField(loginUserName.value, {loginUserName.value = it}, "password")
     }
-
 }

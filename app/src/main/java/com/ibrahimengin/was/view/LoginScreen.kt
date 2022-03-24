@@ -30,7 +30,7 @@ fun LoginScreen(){
     val password = remember { mutableStateOf("") }
     val context = LocalContext.current
     val intent = Intent(context, RegisterActivity::class.java)
-    val activity = (LocalContext.current as? Activity)
+    val activity = (LocalContext.current as? Activity)//TODO activity?.finish() bunu login olduktan sonra
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.padding(horizontal = 5.dp), horizontalAlignment = Alignment.CenterHorizontally,
@@ -45,8 +45,7 @@ fun LoginScreen(){
             }
             Spacer(modifier = Modifier.height(15.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-                ButtonTrailingIcon({context.startActivity(intent)
-                                   activity?.finish()},
+                ButtonTrailingIcon({context.startActivity(intent)},
                     stringResource(R.string.signup), Icons.Filled.PersonAddAlt1,
                     stringResource(R.string.signup), Color.Gray)
                 ButtonTrailingIcon({}, stringResource(R.string.login), Icons.Filled.Login,

@@ -6,4 +6,6 @@
     <string name="login">Giriş Yap</string>
     <string name="signup">Kayıt Ol</string>
     <string name="forgotPassword">Şifreni mi unuttun?</string>
+    <string name="fullName">Ad Soyad</string>
+    <string name="emailAddress">Email Adresi</string>
 </resources>

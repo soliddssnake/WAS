@@ -1,5 +1,5 @@
 package com.ibrahimengin.was
 
-sealed class ScreenHolder(val route: String){
+sealed class ScreenHolder(route: String){
     object FullName: ScreenHolder(route = "full_name")
 }
