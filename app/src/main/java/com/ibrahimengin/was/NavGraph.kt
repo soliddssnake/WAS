@@ -18,7 +18,7 @@ fun SetupNavGraph(navController: NavHostController){
         composable(
             route = ScreenHolder.SignupScreen.toString()
         ){
-            SignupScreen()
+            SignupScreen(navController)
         }
     }
 }

@@ -8,4 +8,6 @@
     <string name="forgotPassword">Şifreni mi unuttun?</string>
     <string name="fullName">Ad Soyad</string>
     <string name="emailAddress">Email Adresi</string>
+    <string name="previous">Önceki</string>
+    <string name="goBack">Geri Dön</string>
 </resources>
