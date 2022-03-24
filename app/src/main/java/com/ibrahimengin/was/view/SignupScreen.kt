@@ -6,12 +6,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -19,7 +19,7 @@ import com.example.compose.WASTheme
 import com.ibrahimengin.was.R
 
 @Composable
-fun RegisterScreen(){
+fun SignupScreen(){
     val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark  else R.drawable.was_logo_light
     val fullName = remember { mutableStateOf("") }
     val username = remember { mutableStateOf("") }
@@ -35,15 +35,15 @@ fun RegisterScreen(){
             CustomOutlinedTextField(username.value, {username.value = it}, stringResource(R.string.username))
             CustomOutlinedTextField(email.value, {email.value = it}, stringResource(R.string.emailAddress))
             PasswordField(password.value, {password.value = it}, stringResource(R.string.password))
-
+            DatePickField()
         }
     }
 }
 
 @Preview
 @Composable
-fun PreviewRegisterScreen(){
+fun PreviewSignupScreen(){
     WASTheme {
-        RegisterScreen()
+        SignupScreen()
     }
 }

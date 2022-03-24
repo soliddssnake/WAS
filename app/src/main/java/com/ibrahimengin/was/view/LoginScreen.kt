@@ -1,7 +1,5 @@
 package com.ibrahimengin.was.view
 
-import android.app.Activity
-import android.content.Intent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
@@ -15,22 +13,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.compose.WASTheme
 import com.ibrahimengin.was.R
-import com.ibrahimengin.was.RegisterActivity
+import com.ibrahimengin.was.ScreenHolder
 
 @Composable
-fun LoginScreen(){
+fun LoginScreen(navController: NavController){
     val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark  else R.drawable.was_logo_light
     val username = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
-    val context = LocalContext.current
-    val intent = Intent(context, RegisterActivity::class.java)
-    val activity = (LocalContext.current as? Activity)//TODO activity?.finish() bunu login olduktan sonra
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.padding(horizontal = 5.dp), horizontalAlignment = Alignment.CenterHorizontally,
@@ -45,7 +41,7 @@ fun LoginScreen(){
             }
             Spacer(modifier = Modifier.height(15.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-                ButtonTrailingIcon({context.startActivity(intent)},
+                ButtonTrailingIcon({navController.navigate(ScreenHolder.SignupScreen.toString())},
                     stringResource(R.string.signup), Icons.Filled.PersonAddAlt1,
                     stringResource(R.string.signup), Color.Gray)
                 ButtonTrailingIcon({}, stringResource(R.string.login), Icons.Filled.Login,
@@ -59,6 +55,6 @@ fun LoginScreen(){
 @Composable
 fun PreviewLoginScreen(){
     WASTheme {
-        LoginScreen()
+        LoginScreen(navController = rememberNavController())
     }
 }
