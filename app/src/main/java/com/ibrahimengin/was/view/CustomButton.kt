@@ -23,7 +23,6 @@ fun ButtonTrailingIcon(buttonClickFunction: () -> Unit, buttonText: String, icon
         Text(buttonText)
         Spacer(modifier = Modifier.width(2.dp))
         Icon(imageVector = iconsInputs, iconsContentDescription, modifier = Modifier.size(18.dp))
-
     }
 }
 

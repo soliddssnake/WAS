@@ -22,9 +22,11 @@ import com.ibrahimengin.was.ui.theme.Shapes
 
 @Composable
 fun CustomOutlinedTextField(customStringValue: String, customTextFieldFunc: (String) -> Unit,
-labelText: String){
+                            labelText: String,
+                            keyboardOption: KeyboardOptions? = KeyboardOptions.Default){
     OutlinedTextField(value = customStringValue, onValueChange = customTextFieldFunc,
-    modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth(),
+        keyboardOptions = keyboardOption!!,
         singleLine = true,
         shape = Shapes.medium,
         label = { Text(labelText) }
@@ -33,15 +35,15 @@ labelText: String){
 
 @Composable
 fun PasswordField(passwordValue: String, passwordFieldFunc: (String) -> Unit,
-labelText: String){
+                  labelText: String){
     val passwordVisible= remember { mutableStateOf(false) }
     OutlinedTextField(value = passwordValue, onValueChange = passwordFieldFunc,
-    modifier = Modifier.fillMaxWidth(),
-    visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
-    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-    singleLine = true,
-    shape = Shapes.medium,
-    label = { Text(labelText) },
+        modifier = Modifier.fillMaxWidth(),
+        visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        singleLine = true,
+        shape = Shapes.medium,
+        label = { Text(labelText) },
         trailingIcon = {
             val image = if (passwordVisible.value)
                 Icons.Filled.Visibility
@@ -54,7 +56,7 @@ labelText: String){
             }
         }
 
-            )
+    )
 }
 
 @Preview

@@ -10,4 +10,6 @@
     <string name="emailAddress">Email Adresi</string>
     <string name="previous">Önceki</string>
     <string name="goBack">Geri Dön</string>
+    <string name="birthday">Doğum Günü</string>
+    <string name="next">Sonraki</string>
 </resources>

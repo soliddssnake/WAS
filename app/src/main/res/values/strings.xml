@@ -9,5 +9,7 @@
     <string name="emailAddress">Email Address</string>
     <string name="previous">Previous</string>
     <string name="goBack">Go Back</string>
+    <string name="birthday">Birthday</string>
+    <string name="next">Next</string>
     <string name="title_activity_register" translatable="false">RegisterActivity</string>
 </resources>

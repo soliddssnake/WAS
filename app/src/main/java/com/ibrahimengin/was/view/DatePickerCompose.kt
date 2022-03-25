@@ -4,12 +4,16 @@ import android.app.DatePickerDialog
 import android.widget.DatePicker
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Cake
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.compose.WASTheme
@@ -17,7 +21,8 @@ import com.ibrahimengin.was.ui.theme.Shapes
 import java.util.*
 
 @Composable
-fun DatePickField(){
+fun DatePickField(labelText: String, trailingIconInput: ImageVector? = null,
+                  iconContentDescription: String? = null){
     val year: Int
     val month: Int
     val day: Int
@@ -40,7 +45,10 @@ fun DatePickField(){
         enabled = false,
         singleLine = true,
         shape = Shapes.medium,
-        label = { Text("Birthday") }
+        label = { Text(labelText) },
+        trailingIcon = {
+            Icon(trailingIconInput!!, iconContentDescription)
+        }
     )
 }
 
@@ -48,6 +56,6 @@ fun DatePickField(){
 @Preview
 @Composable
 fun PreviewDatePicker(){
-    WASTheme { DatePickField() }
+    WASTheme { DatePickField("Birthday", Icons.Filled.Cake, "Birthday") }
 }
 
