@@ -21,23 +21,29 @@ import com.example.compose.WASTheme
 import com.ibrahimengin.was.ui.theme.Shapes
 
 @Composable
-fun CustomOutlinedTextField(customStringValue: String, customTextFieldFunc: (String) -> Unit,
-                            labelText: String,
-                            keyboardOption: KeyboardOptions? = KeyboardOptions.Default){
-    OutlinedTextField(value = customStringValue, onValueChange = customTextFieldFunc,
+fun CustomOutlinedTextField(
+    customStringValue: String,
+    customTextFieldFunc: (String) -> Unit,
+    labelText: String,
+    keyboardOption: KeyboardOptions? = KeyboardOptions.Default
+) {
+    OutlinedTextField(value = customStringValue,
+        onValueChange = customTextFieldFunc,
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = keyboardOption!!,
         singleLine = true,
         shape = Shapes.medium,
-        label = { Text(labelText) }
-    )
+        label = { Text(labelText) })
 }
 
 @Composable
-fun PasswordField(passwordValue: String, passwordFieldFunc: (String) -> Unit,
-                  labelText: String){
-    val passwordVisible= remember { mutableStateOf(false) }
-    OutlinedTextField(value = passwordValue, onValueChange = passwordFieldFunc,
+fun PasswordField(
+    passwordValue: String, passwordFieldFunc: (String) -> Unit, labelText: String
+) {
+    val passwordVisible = remember { mutableStateOf(false) }
+    OutlinedTextField(
+        value = passwordValue,
+        onValueChange = passwordFieldFunc,
         modifier = Modifier.fillMaxWidth(),
         visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -45,8 +51,7 @@ fun PasswordField(passwordValue: String, passwordFieldFunc: (String) -> Unit,
         shape = Shapes.medium,
         label = { Text(labelText) },
         trailingIcon = {
-            val image = if (passwordVisible.value)
-                Icons.Filled.Visibility
+            val image = if (passwordVisible.value) Icons.Filled.Visibility
             else Icons.Filled.VisibilityOff
 
             val description = if (passwordVisible.value) "Hide password" else "Show password"
@@ -61,10 +66,10 @@ fun PasswordField(passwordValue: String, passwordFieldFunc: (String) -> Unit,
 
 @Preview
 @Composable
-fun PreviewTextField(){
+fun PreviewTextField() {
     WASTheme {
         val loginUserName = remember { mutableStateOf("") }
         //CustomOutlinedTextField(loginUserName.value,{if (it.length <= 50) loginUserName.value = it },"LABEL")
-        PasswordField(loginUserName.value, {loginUserName.value = it}, "password")
+        PasswordField(loginUserName.value, { loginUserName.value = it }, "password")
     }
 }

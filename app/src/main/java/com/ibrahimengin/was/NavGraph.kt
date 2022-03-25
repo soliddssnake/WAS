@@ -8,16 +8,16 @@ import com.ibrahimengin.was.view.LoginScreen
 import com.ibrahimengin.was.view.SignupScreen
 
 @Composable
-fun SetupNavGraph(navController: NavHostController){
-    NavHost(navController = navController, startDestination = ScreenHolder.LoginScreen.toString()){
+fun SetupNavGraph(navController: NavHostController) {
+    NavHost(navController = navController, startDestination = ScreenHolder.LoginScreen.toString()) {
         composable(
             route = ScreenHolder.LoginScreen.toString()
-        ){
+        ) {
             LoginScreen(navController)
         }
         composable(
             route = ScreenHolder.SignupScreen.toString()
-        ){
+        ) {
             SignupScreen(navController)
         }
     }
