@@ -17,9 +17,14 @@ import androidx.compose.ui.unit.dp
 import com.example.compose.WASTheme
 
 @Composable
-fun ButtonTrailingIcon(buttonClickFunction: () -> Unit, buttonText: String, iconsInputs: ImageVector,
-                       iconsContentDescription: String, colorInput: Color? = MaterialTheme.colors.primary) {
-    Button(onClick = buttonClickFunction, colors = ButtonDefaults.buttonColors(colorInput!!)){
+fun ButtonTrailingIcon(
+    buttonClickFunction: () -> Unit,
+    buttonText: String,
+    iconsInputs: ImageVector,
+    iconsContentDescription: String,
+    colorInput: Color? = MaterialTheme.colors.primary
+) {
+    Button(onClick = buttonClickFunction, colors = ButtonDefaults.buttonColors(colorInput!!)) {
         Text(buttonText)
         Spacer(modifier = Modifier.width(2.dp))
         Icon(imageVector = iconsInputs, iconsContentDescription, modifier = Modifier.size(18.dp))
@@ -27,9 +32,14 @@ fun ButtonTrailingIcon(buttonClickFunction: () -> Unit, buttonText: String, icon
 }
 
 @Composable
-fun ButtonLeadingIcon(buttonClickFunction: () -> Unit, buttonText: String, iconsInputs: ImageVector,
-                      iconsContentDescription: String, colorInput: Color? = MaterialTheme.colors.primary){
-    Button(onClick = buttonClickFunction, colors = ButtonDefaults.buttonColors(colorInput!!)){
+fun ButtonLeadingIcon(
+    buttonClickFunction: () -> Unit,
+    buttonText: String,
+    iconsInputs: ImageVector,
+    iconsContentDescription: String,
+    colorInput: Color? = MaterialTheme.colors.primary
+) {
+    Button(onClick = buttonClickFunction, colors = ButtonDefaults.buttonColors(colorInput!!)) {
         Icon(imageVector = iconsInputs, iconsContentDescription, modifier = Modifier.size(18.dp))
         Spacer(modifier = Modifier.width(2.dp))
         Text(buttonText)
@@ -38,11 +48,11 @@ fun ButtonLeadingIcon(buttonClickFunction: () -> Unit, buttonText: String, icons
 
 @Preview
 @Composable
-fun PreviewButtonDefine(){
+fun PreviewButtonDefine() {
     WASTheme {
         Column {
-            ButtonTrailingIcon({},"BUTTON",Icons.Filled.Alarm,"Button")
-            ButtonLeadingIcon({},"LBUTTON",Icons.Filled.Cake,"")
+            ButtonTrailingIcon({}, "BUTTON", Icons.Filled.Alarm, "Button")
+            ButtonLeadingIcon({}, "LBUTTON", Icons.Filled.Cake, "")
         }
 
     }

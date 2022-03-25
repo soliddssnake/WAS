@@ -23,17 +23,20 @@ import com.ibrahimengin.was.R
 import com.ibrahimengin.was.ScreenHolder
 
 @Composable
-fun LoginScreen(navController: NavController){
-    val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark  else R.drawable.was_logo_light
+fun LoginScreen(navController: NavController) {
+    val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark else R.drawable.was_logo_light
     val username = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
 
     Surface(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier.padding(horizontal = 5.dp), horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center) {
-            CustomImage(logo,"WAS Logo",250.dp,250.dp)
-            CustomOutlinedTextField(username.value, {username.value = it}, stringResource(R.string.username))
-            PasswordField(password.value, {password.value = it}, stringResource(R.string.password))
+        Column(
+            modifier = Modifier.padding(horizontal = 5.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            CustomImage(logo, "WAS Logo", 250.dp, 250.dp)
+            CustomOutlinedTextField(username.value, { username.value = it }, stringResource(R.string.username))
+            PasswordField(password.value, { password.value = it }, stringResource(R.string.password))
             Spacer(modifier = Modifier.height(5.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                 Text(stringResource(R.string.forgotPassword))//TODO clickable-onClick fonksionu eklenecek
@@ -41,11 +44,16 @@ fun LoginScreen(navController: NavController){
             }
             Spacer(modifier = Modifier.height(15.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-                ButtonTrailingIcon({navController.navigate(ScreenHolder.SignupScreen.toString())},
-                    stringResource(R.string.signup), Icons.Filled.PersonAddAlt1,
-                    stringResource(R.string.signup), Color.Gray)
-                ButtonTrailingIcon({}, stringResource(R.string.login), Icons.Filled.Login,
-                    stringResource(R.string.login))//TODO onClick fonksionu eklenecek
+                ButtonTrailingIcon(
+                    { navController.navigate(ScreenHolder.SignupScreen.toString()) },
+                    stringResource(R.string.signup),
+                    Icons.Filled.PersonAddAlt1,
+                    stringResource(R.string.signup),
+                    Color.Gray
+                )
+                ButtonTrailingIcon(
+                    {}, stringResource(R.string.login), Icons.Filled.Login, stringResource(R.string.login)
+                )//TODO onClick fonksionu eklenecek
             }
         }
     }
@@ -53,7 +61,7 @@ fun LoginScreen(navController: NavController){
 
 @Preview
 @Composable
-fun PreviewLoginScreen(){
+fun PreviewLoginScreen() {
     WASTheme {
         LoginScreen(navController = rememberNavController())
     }

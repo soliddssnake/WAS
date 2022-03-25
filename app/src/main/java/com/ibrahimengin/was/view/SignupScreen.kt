@@ -28,8 +28,8 @@ import com.example.compose.WASTheme
 import com.ibrahimengin.was.R
 
 @Composable
-fun SignupScreen(navController: NavController){
-    val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark  else R.drawable.was_logo_light
+fun SignupScreen(navController: NavController) {
+    val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark else R.drawable.was_logo_light
     val fullName = remember { mutableStateOf("") }
     val username = remember { mutableStateOf("") }
     val email = remember { mutableStateOf("") }
@@ -38,31 +38,51 @@ fun SignupScreen(navController: NavController){
 
 
     Surface(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier.padding(horizontal = 5.dp), horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center) {
-            CustomImage(logo, "WAS Logo", 180.dp,180.dp)
-            CustomOutlinedTextField(fullName.value,
+        Column(
+            modifier = Modifier.padding(horizontal = 5.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            CustomImage(logo, "WAS Logo", 180.dp, 180.dp)
+            CustomOutlinedTextField(
+                fullName.value,
                 {
                     fullName.value = it
                 },
                 stringResource(R.string.fullName),
-                keyboardOption =  KeyboardOptions(capitalization = KeyboardCapitalization.Words))
-            CustomOutlinedTextField(username.value, {username.value = it}, stringResource(R.string.username))
-            CustomOutlinedTextField(email.value, {email.value = it},
+                keyboardOption = KeyboardOptions(capitalization = KeyboardCapitalization.Words)
+            )
+            CustomOutlinedTextField(username.value, { username.value = it }, stringResource(R.string.username))
+            CustomOutlinedTextField(
+                email.value,
+                { email.value = it },
                 stringResource(R.string.emailAddress),
-                keyboardOption = KeyboardOptions(keyboardType = KeyboardType.Email))
-            PasswordField(password.value, {password.value = it}, stringResource(R.string.password))
-            DatePickField(stringResource(R.string.birthday),Icons.Filled.Cake, stringResource(R.string.birthday))
+                keyboardOption = KeyboardOptions(keyboardType = KeyboardType.Email)
+            )
+            PasswordField(password.value, { password.value = it }, stringResource(R.string.password))
+            DatePickField(stringResource(R.string.birthday), Icons.Filled.Cake, stringResource(R.string.birthday))
             Spacer(modifier = Modifier.height(10.dp))
-            Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 14.dp),
-                horizontalArrangement = Arrangement.SpaceBetween) {
-                ButtonLeadingIcon({navController.popBackStack()},
-                    stringResource(R.string.goBack), Icons.Filled.ArrowBack, stringResource(R.string.goBack),
-                    colorInput = Color.Gray)
-                ButtonTrailingIcon( {if (email.value.matches(PatternsCompat.EMAIL_ADDRESS.toRegex())
-                    || fullName.value.isNotEmpty() || username.value.isNotEmpty() )
-                    Toast.makeText(context,"Doldurduğundan emin ol!",Toast.LENGTH_LONG).show() },//TODO Questions ekranına yönlenecek ve düzenlenecek
-                    stringResource(R.string.next),Icons.Filled.ArrowForward, stringResource(R.string.next))
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 14.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                ButtonLeadingIcon(
+                    { navController.popBackStack() },
+                    stringResource(R.string.goBack),
+                    Icons.Filled.ArrowBack,
+                    stringResource(R.string.goBack),
+                    colorInput = Color.Gray
+                )
+                ButtonTrailingIcon(
+                    {
+                        if (email.value.matches(PatternsCompat.EMAIL_ADDRESS.toRegex()) || fullName.value.isNotEmpty() || username.value.isNotEmpty()) Toast.makeText(
+                            context,
+                            "Doldurduğundan emin ol!",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    },//TODO Questions ekranına yönlenecek ve düzenlenecek
+                    stringResource(R.string.next), Icons.Filled.ArrowForward, stringResource(R.string.next)
+                )
             }
         }
     }
@@ -70,7 +90,7 @@ fun SignupScreen(navController: NavController){
 
 @Preview
 @Composable
-fun PreviewSignupScreen(){
+fun PreviewSignupScreen() {
     WASTheme {
         SignupScreen(navController = rememberNavController())
     }

@@ -14,16 +14,27 @@ import androidx.compose.ui.unit.dp
 import com.ibrahimengin.was.R
 
 @Composable
-fun CustomImage(customImageId: Int, descriptionImage: String?, height: Dp, width: Dp,
-                paddingStart: Dp? = 0.dp, paddingTop: Dp? = 0.dp, paddingEnd: Dp? =0.dp, paddingBottom: Dp? = 0.dp){
-    Image(bitmap = ImageBitmap.imageResource(id = customImageId), contentDescription = descriptionImage,
-        modifier = Modifier.size(width,height)
-        .padding(start = paddingStart!!, top = paddingTop!!, end = paddingEnd!!, bottom = paddingBottom!!))
+fun CustomImage(
+    customImageId: Int,
+    descriptionImage: String?,
+    height: Dp,
+    width: Dp,
+    paddingStart: Dp? = 0.dp,
+    paddingTop: Dp? = 0.dp,
+    paddingEnd: Dp? = 0.dp,
+    paddingBottom: Dp? = 0.dp
+) {
+    Image(
+        bitmap = ImageBitmap.imageResource(id = customImageId),
+        contentDescription = descriptionImage,
+        modifier = Modifier.size(width, height)
+            .padding(start = paddingStart!!, top = paddingTop!!, end = paddingEnd!!, bottom = paddingBottom!!)
+    )
 }
 
 @Preview
 @Composable
-fun PreviewImage(){
+fun PreviewImage() {
     var logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark else R.drawable.was_logo_light
-    CustomImage(logo,null,300.dp,300.dp,25.dp,0.dp,25.dp)
+    CustomImage(logo, null, 300.dp, 300.dp, 25.dp, 0.dp, 25.dp)
 }
