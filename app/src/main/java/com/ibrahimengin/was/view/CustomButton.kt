@@ -22,9 +22,10 @@ fun ButtonTrailingIcon(
     buttonText: String,
     iconsInputs: ImageVector,
     iconsContentDescription: String,
-    colorInput: Color? = MaterialTheme.colors.primary
+    colorInput: Color? = MaterialTheme.colors.primary,
+    enableInput: Boolean? = true
 ) {
-    Button(onClick = buttonClickFunction, colors = ButtonDefaults.buttonColors(colorInput!!)) {
+    Button(onClick = buttonClickFunction, colors = ButtonDefaults.buttonColors(colorInput!!), enabled = enableInput!!) {
         Text(buttonText)
         Spacer(modifier = Modifier.width(2.dp))
         Icon(imageVector = iconsInputs, iconsContentDescription, modifier = Modifier.size(18.dp))

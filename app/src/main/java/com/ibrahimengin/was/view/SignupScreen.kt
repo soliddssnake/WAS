@@ -34,8 +34,13 @@ fun SignupScreen(navController: NavController) {
     val username = remember { mutableStateOf("") }
     val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
+    val date = remember { mutableStateOf("") }
     val context = LocalContext.current
-
+    val isErrorStateFullName = remember { mutableStateOf(true) }
+    val isErrorStateUsername = remember { mutableStateOf(true) }
+    val isErrorStateEmail = remember { mutableStateOf(true) }
+    val isErrorStatePassword = remember { mutableStateOf(true) }
+    val isEnabled = remember { mutableStateOf(true) }
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -48,19 +53,48 @@ fun SignupScreen(navController: NavController) {
                 fullName.value,
                 {
                     fullName.value = it
+                    isErrorStateFullName.value = when {
+                        it.length < 3 -> true
+                        else -> false
+                    }
                 },
                 stringResource(R.string.fullName),
+                isErrorStateFullName.value,
                 keyboardOption = KeyboardOptions(capitalization = KeyboardCapitalization.Words)
             )
-            CustomOutlinedTextField(username.value, { username.value = it }, stringResource(R.string.username))
+            CustomOutlinedTextField(
+                username.value, {
+                    username.value = it
+                    isErrorStateUsername.value = when {
+                        it.length < 3 -> true
+                        else -> false
+                    }
+                }, stringResource(R.string.username), isErrorStateUsername.value
+            )
             CustomOutlinedTextField(
                 email.value,
-                { email.value = it },
+                {
+                    email.value = it
+                    isErrorStateEmail.value = when {
+                        it.length < 5 -> true
+                        !email.value.matches(PatternsCompat.EMAIL_ADDRESS.toRegex()) -> true
+                        else -> false
+                    }
+                },
                 stringResource(R.string.emailAddress),
+                isErrorStateEmail.value,
                 keyboardOption = KeyboardOptions(keyboardType = KeyboardType.Email)
             )
-            PasswordField(password.value, { password.value = it }, stringResource(R.string.password))
-            DatePickField(stringResource(R.string.birthday), Icons.Filled.Cake, stringResource(R.string.birthday))
+            PasswordField(
+                password.value, {
+                    password.value = it
+                    isErrorStatePassword.value = when {
+                        it.length < 6 -> true
+                        else -> false
+                    }
+                }, stringResource(R.string.password), isErrorStatePassword.value
+            )
+            DatePickField(stringResource(R.string.birthday), Icons.Filled.Cake, stringResource(R.string.birthday), date)
             Spacer(modifier = Modifier.height(10.dp))
             Row(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 14.dp),
@@ -75,13 +109,16 @@ fun SignupScreen(navController: NavController) {
                 )
                 ButtonTrailingIcon(
                     {
-                        if (email.value.matches(PatternsCompat.EMAIL_ADDRESS.toRegex()) || fullName.value.isNotEmpty() || username.value.isNotEmpty()) Toast.makeText(
-                            context,
-                            "Doldurduğundan emin ol!",
-                            Toast.LENGTH_LONG
+                        Toast.makeText(
+                            context, "Helal Adamsın Cansın", Toast.LENGTH_LONG
                         ).show()
-                    },//TODO Questions ekranına yönlenecek ve düzenlenecek
-                    stringResource(R.string.next), Icons.Filled.ArrowForward, stringResource(R.string.next)
+                    },/*TODO Questions ekranına yönlenecek düzenlenecek ve email firebase bakılacak
+                        Butona tıklandığında isEnabled false olacak eğer email hatası alırsa tekrar true
+                    */
+                    stringResource(R.string.next),
+                    Icons.Filled.ArrowForward,
+                    stringResource(R.string.next),
+                    enableInput = !isErrorStateFullName.value && !isErrorStateEmail.value && !isErrorStatePassword.value && !isErrorStateUsername.value && date.value.isNotEmpty() && isEnabled.value
                 )
             }
         }

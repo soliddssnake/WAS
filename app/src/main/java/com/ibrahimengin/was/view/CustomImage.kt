@@ -35,6 +35,6 @@ fun CustomImage(
 @Preview
 @Composable
 fun PreviewImage() {
-    var logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark else R.drawable.was_logo_light
+    val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark else R.drawable.was_logo_light
     CustomImage(logo, null, 300.dp, 300.dp, 25.dp, 0.dp, 25.dp)
 }

@@ -10,8 +10,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Cake
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
@@ -21,8 +21,12 @@ import com.ibrahimengin.was.ui.theme.Shapes
 import java.util.*
 
 @Composable
-fun DatePickField(labelText: String, trailingIconInput: ImageVector? = null,
-                  iconContentDescription: String? = null){
+fun DatePickField(
+    labelText: String,
+    trailingIconInput: ImageVector? = null,
+    contentDescriptionIcon: String? = null,
+    date: MutableState<String>
+) {
     val year: Int
     val month: Int
     val day: Int
@@ -34,28 +38,26 @@ fun DatePickField(labelText: String, trailingIconInput: ImageVector? = null,
     day = calendar.get(Calendar.DAY_OF_MONTH)
     calendar.time = Date()
 
-    val date = remember { mutableStateOf("") }
-    val datePickerDialog = DatePickerDialog(context,{
-            _:DatePicker, year: Int, month: Int, dayOfMonth: Int ->
-            date.value = "$dayOfMonth/$month/$year"
-        },year,month,day)
+    val datePickerDialog = DatePickerDialog(context, { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+        date.value = "$dayOfMonth/$month/$year"
+    }, year, month, day)
 
-    OutlinedTextField(value = date.value, onValueChange = {date.value = it},
-        modifier = Modifier.fillMaxWidth().clickable {datePickerDialog.show()},
+    OutlinedTextField(value = date.value,
+        onValueChange = { date.value = it },
+        modifier = Modifier.fillMaxWidth().clickable { datePickerDialog.show() },
         enabled = false,
         singleLine = true,
         shape = Shapes.medium,
         label = { Text(labelText) },
         trailingIcon = {
-            Icon(trailingIconInput!!, iconContentDescription)
-        }
-    )
+            Icon(trailingIconInput!!, contentDescriptionIcon)
+        })
 }
 
 
 @Preview
 @Composable
-fun PreviewDatePicker(){
-    WASTheme { DatePickField("Birthday", Icons.Filled.Cake, "Birthday") }
+fun PreviewDatePicker() {
+    WASTheme { DatePickField("Birthday", Icons.Filled.Cake, "Birthday", mutableStateOf("12/12/1999")) }
 }
 

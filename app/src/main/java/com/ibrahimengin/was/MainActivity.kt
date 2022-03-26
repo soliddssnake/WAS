@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.WASTheme
-import com.ibrahimengin.was.view.LoginScreen
 
 class MainActivity : ComponentActivity() {
 

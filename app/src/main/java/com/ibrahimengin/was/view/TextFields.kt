@@ -25,12 +25,14 @@ fun CustomOutlinedTextField(
     customStringValue: String,
     customTextFieldFunc: (String) -> Unit,
     labelText: String,
+    errorInput: Boolean? = false,
     keyboardOption: KeyboardOptions? = KeyboardOptions.Default
 ) {
     OutlinedTextField(value = customStringValue,
         onValueChange = customTextFieldFunc,
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = keyboardOption!!,
+        isError = errorInput!!,
         singleLine = true,
         shape = Shapes.medium,
         label = { Text(labelText) })
@@ -38,7 +40,7 @@ fun CustomOutlinedTextField(
 
 @Composable
 fun PasswordField(
-    passwordValue: String, passwordFieldFunc: (String) -> Unit, labelText: String
+    passwordValue: String, passwordFieldFunc: (String) -> Unit, labelText: String, errorInput: Boolean? = false,
 ) {
     val passwordVisible = remember { mutableStateOf(false) }
     OutlinedTextField(
@@ -47,6 +49,7 @@ fun PasswordField(
         modifier = Modifier.fillMaxWidth(),
         visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        isError = errorInput!!,
         singleLine = true,
         shape = Shapes.medium,
         label = { Text(labelText) },
