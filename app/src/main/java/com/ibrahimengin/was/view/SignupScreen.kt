@@ -25,10 +25,13 @@ import androidx.core.util.PatternsCompat
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.WASTheme
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.ibrahimengin.was.R
 
 @Composable
-fun SignupScreen(navController: NavController) {
+fun SignupScreen(navController: NavController, db: FirebaseFirestore) {
     val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark else R.drawable.was_logo_light
     val fullName = remember { mutableStateOf("") }
     val username = remember { mutableStateOf("") }
@@ -41,6 +44,7 @@ fun SignupScreen(navController: NavController) {
     val isErrorStateEmail = remember { mutableStateOf(true) }
     val isErrorStatePassword = remember { mutableStateOf(true) }
     val isEnabled = remember { mutableStateOf(true) }
+
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -109,9 +113,15 @@ fun SignupScreen(navController: NavController) {
                 )
                 ButtonTrailingIcon(
                     {
-                        Toast.makeText(
-                            context, "Helal Adamsın Cansın", Toast.LENGTH_LONG
-                        ).show()
+                        db.collection("users").document(email.value).get().addOnSuccessListener { document ->
+                            if (document.exists()) {
+                                Toast.makeText(context, "bundan var gardaaaş", Toast.LENGTH_LONG).show()
+                            } else {
+                                Toast.makeText(context, "olur olur yeriz", Toast.LENGTH_LONG).show()
+                            }
+                        }.addOnFailureListener {
+                            Toast.makeText(context, it.localizedMessage, Toast.LENGTH_LONG).show()
+                        }
                     },/*TODO Questions ekranına yönlenecek düzenlenecek ve email firebase bakılacak
                         Butona tıklandığında isEnabled false olacak eğer email hatası alırsa tekrar true
                     */
@@ -129,6 +139,6 @@ fun SignupScreen(navController: NavController) {
 @Composable
 fun PreviewSignupScreen() {
     WASTheme {
-        SignupScreen(navController = rememberNavController())
+        SignupScreen(navController = rememberNavController(), Firebase.firestore)
     }
 }
