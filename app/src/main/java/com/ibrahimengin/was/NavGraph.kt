@@ -4,9 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.ibrahimengin.was.view.LoginScreen
+import com.ibrahimengin.was.view.QuestionsScreen
 import com.ibrahimengin.was.view.SignupScreen
 
 @Composable
@@ -20,7 +19,12 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(
             route = ScreenHolder.SignupScreen.toString()
         ) {
-            SignupScreen(navController, Firebase.firestore)
+            SignupScreen(navController)
+        }
+        composable(
+            route = ScreenHolder.QuestionsScreen.toString()
+        ) {
+            QuestionsScreen(navController)
         }
     }
 }

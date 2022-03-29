@@ -6,10 +6,12 @@
     <string name="login">Giriş Yap</string>
     <string name="signup">Kayıt Ol</string>
     <string name="forgotPassword">Şifreni mi unuttun?</string>
-    <string name="fullName">Ad Soyad</string>
+    <string name="name">Ad</string>
     <string name="emailAddress">Email Adresi</string>
     <string name="previous">Önceki</string>
     <string name="goBack">Geri Dön</string>
     <string name="birthday">Doğum Günü</string>
     <string name="next">Sonraki</string>
+    <string name="surname">Soyad</string>
+    <string name="thisEmailIsAlreadyInUse">Bu email zaten kullanımda.</string>
 </resources>

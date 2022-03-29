@@ -5,11 +5,13 @@
     <string name="login">Log In</string>
     <string name="signup">Sign Up</string>
     <string name="forgotPassword">Forgot password?</string>
-    <string name="fullName">Full Name</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
     <string name="emailAddress">Email Address</string>
     <string name="previous">Previous</string>
     <string name="goBack">Go Back</string>
     <string name="birthday">Birthday</string>
     <string name="next">Next</string>
+    <string name="thisEmailIsAlreadyInUse">This email is already in use.</string>
     <string name="title_activity_register" translatable="false">RegisterActivity</string>
 </resources>

@@ -25,26 +25,28 @@ import androidx.core.util.PatternsCompat
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.WASTheme
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.ibrahimengin.was.R
+import com.ibrahimengin.was.ScreenHolder
 
 @Composable
-fun SignupScreen(navController: NavController, db: FirebaseFirestore) {
+fun SignupScreen(navController: NavController) {
     val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark else R.drawable.was_logo_light
-    val fullName = remember { mutableStateOf("") }
+    val name = remember { mutableStateOf("") }
+    val surname = remember { mutableStateOf("") }
     val username = remember { mutableStateOf("") }
     val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
     val date = remember { mutableStateOf("") }
-    val context = LocalContext.current
-    val isErrorStateFullName = remember { mutableStateOf(true) }
+    val isErrorStateName = remember { mutableStateOf(true) }
+    val isErrorStateSurname = remember { mutableStateOf(true) }
     val isErrorStateUsername = remember { mutableStateOf(true) }
     val isErrorStateEmail = remember { mutableStateOf(true) }
     val isErrorStatePassword = remember { mutableStateOf(true) }
     val isEnabled = remember { mutableStateOf(true) }
-
+    val context = LocalContext.current
+    val db = Firebase.firestore
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -53,17 +55,31 @@ fun SignupScreen(navController: NavController, db: FirebaseFirestore) {
             verticalArrangement = Arrangement.Center
         ) {
             CustomImage(logo, "WAS Logo", 180.dp, 180.dp)
+
             CustomOutlinedTextField(
-                fullName.value,
+                name.value,
                 {
-                    fullName.value = it
-                    isErrorStateFullName.value = when {
+                    name.value = it
+                    isErrorStateName.value = when {
                         it.length < 3 -> true
                         else -> false
                     }
                 },
-                stringResource(R.string.fullName),
-                isErrorStateFullName.value,
+                stringResource(R.string.name),
+                isErrorStateName.value,
+                keyboardOption = KeyboardOptions(capitalization = KeyboardCapitalization.Words)
+            )
+            CustomOutlinedTextField(
+                surname.value,
+                {
+                    surname.value = it
+                    isErrorStateSurname.value = when {
+                        it.length < 3 -> true
+                        else -> false
+                    }
+                },
+                stringResource(R.string.surname),
+                isErrorStateSurname.value,
                 keyboardOption = KeyboardOptions(capitalization = KeyboardCapitalization.Words)
             )
             CustomOutlinedTextField(
@@ -115,20 +131,26 @@ fun SignupScreen(navController: NavController, db: FirebaseFirestore) {
                     {
                         db.collection("users").document(email.value).get().addOnSuccessListener { document ->
                             if (document.exists()) {
-                                Toast.makeText(context, "bundan var gardaaaş", Toast.LENGTH_LONG).show()
+                                Toast.makeText(
+                                    context,
+                                    stringResource(R.string.thisEmailIsAlreadyInUse),
+                                    Toast.LENGTH_LONG
+                                ).show()
                             } else {
                                 Toast.makeText(context, "olur olur yeriz", Toast.LENGTH_LONG).show()
+                                navController.navigate(ScreenHolder.QuestionsScreen.toString())
                             }
                         }.addOnFailureListener {
                             Toast.makeText(context, it.localizedMessage, Toast.LENGTH_LONG).show()
                         }
+
                     },/*TODO Questions ekranına yönlenecek düzenlenecek ve email firebase bakılacak
                         Butona tıklandığında isEnabled false olacak eğer email hatası alırsa tekrar true
                     */
                     stringResource(R.string.next),
                     Icons.Filled.ArrowForward,
                     stringResource(R.string.next),
-                    enableInput = !isErrorStateFullName.value && !isErrorStateEmail.value && !isErrorStatePassword.value && !isErrorStateUsername.value && date.value.isNotEmpty() && isEnabled.value
+                    enableInput = !isErrorStateName.value && !isErrorStateEmail.value && !isErrorStatePassword.value && !isErrorStateUsername.value && date.value.isNotEmpty() && isEnabled.value
                 )
             }
         }
@@ -139,6 +161,6 @@ fun SignupScreen(navController: NavController, db: FirebaseFirestore) {
 @Composable
 fun PreviewSignupScreen() {
     WASTheme {
-        SignupScreen(navController = rememberNavController(), Firebase.firestore)
+        SignupScreen(rememberNavController())
     }
 }
