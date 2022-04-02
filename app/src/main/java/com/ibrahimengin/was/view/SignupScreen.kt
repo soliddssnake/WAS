@@ -36,17 +36,23 @@ fun SignupScreen(navController: NavController) {
     val name = remember { mutableStateOf("") }
     val surname = remember { mutableStateOf("") }
     val username = remember { mutableStateOf("") }
+    val phoneNumber = remember { mutableStateOf("") }
     val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
+    val gender = listOf(stringResource(R.string.male), stringResource(R.string.female))
+    val genderExpandState = remember { mutableStateOf(false) }
+    val genderSelected = remember { mutableStateOf("") }
     val date = remember { mutableStateOf("") }
     val isErrorStateName = remember { mutableStateOf(true) }
     val isErrorStateSurname = remember { mutableStateOf(true) }
     val isErrorStateUsername = remember { mutableStateOf(true) }
+    val isErrorStatePhoneNumber = remember { mutableStateOf(true) }
     val isErrorStateEmail = remember { mutableStateOf(true) }
     val isErrorStatePassword = remember { mutableStateOf(true) }
-    val isEnabled = remember { mutableStateOf(true) }
+    val nextButtonIsEnabled = remember { mutableStateOf(true) }
     val context = LocalContext.current
-    val db = Firebase.firestore
+    val emailValidationMessage = stringResource(R.string.thisEmailIsAlreadyInUse)
+    val usernameValidationMessage = stringResource(R.string.thisUsernameIsAlreadyInUse)
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -54,7 +60,7 @@ fun SignupScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            CustomImage(logo, "WAS Logo", 180.dp, 180.dp)
+            CustomImage(logo, "WAS Logo", 120.dp, 120.dp)
 
             CustomOutlinedTextField(
                 name.value,
@@ -92,6 +98,19 @@ fun SignupScreen(navController: NavController) {
                 }, stringResource(R.string.username), isErrorStateUsername.value
             )
             CustomOutlinedTextField(
+                phoneNumber.value,
+                {
+                    if (it.length < 11) phoneNumber.value = it
+                    isErrorStatePhoneNumber.value = when (it.length) {
+                        10 -> false
+                        else -> true
+                    }
+                },
+                stringResource(R.string.phoneNumber),
+                isErrorStatePhoneNumber.value,
+                KeyboardOptions(keyboardType = KeyboardType.Phone)
+            )
+            CustomOutlinedTextField(
                 email.value,
                 {
                     email.value = it
@@ -115,6 +134,15 @@ fun SignupScreen(navController: NavController) {
                 }, stringResource(R.string.password), isErrorStatePassword.value
             )
             DatePickField(stringResource(R.string.birthday), Icons.Filled.Cake, stringResource(R.string.birthday), date)
+
+            Dropdown(
+                genderSelected,
+                { genderSelected.value = it },
+                genderExpandState,
+                gender,
+                stringResource(R.string.gender)
+            )
+
             Spacer(modifier = Modifier.height(10.dp))
             Row(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 14.dp),
@@ -129,28 +157,33 @@ fun SignupScreen(navController: NavController) {
                 )
                 ButtonTrailingIcon(
                     {
-                        db.collection("users").document(email.value).get().addOnSuccessListener { document ->
-                            if (document.exists()) {
-                                Toast.makeText(
-                                    context,
-                                    stringResource(R.string.thisEmailIsAlreadyInUse),
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            } else {
-                                Toast.makeText(context, "olur olur yeriz", Toast.LENGTH_LONG).show()
-                                navController.navigate(ScreenHolder.QuestionsScreen.toString())
-                            }
-                        }.addOnFailureListener {
-                            Toast.makeText(context, it.localizedMessage, Toast.LENGTH_LONG).show()
-                        }
+                        nextButtonIsEnabled.value = false
 
-                    },/*TODO Questions ekranına yönlenecek düzenlenecek ve email firebase bakılacak
-                        Butona tıklandığında isEnabled false olacak eğer email hatası alırsa tekrar true
-                    */
+                        Firebase.firestore.collection("users").document(email.value).get().addOnSuccessListener {
+                            if (it.exists()) {
+                                Toast.makeText(context, emailValidationMessage, Toast.LENGTH_LONG).show()
+                            } else {
+                                Firebase.firestore.collection("users").whereEqualTo("username", username.value).get()
+                                    .addOnSuccessListener {
+                                        if (it.documents.isEmpty()) {
+                                            navController.navigate(ScreenHolder.QuestionsScreen.toString())
+                                        } else {
+                                            Toast.makeText(context, usernameValidationMessage, Toast.LENGTH_LONG).show()
+                                        }
+                                    }
+                            }
+
+                        }.addOnFailureListener {
+
+                        }
+                        nextButtonIsEnabled.value = true
+
+
+                    },
                     stringResource(R.string.next),
                     Icons.Filled.ArrowForward,
                     stringResource(R.string.next),
-                    enableInput = !isErrorStateName.value && !isErrorStateEmail.value && !isErrorStatePassword.value && !isErrorStateUsername.value && date.value.isNotEmpty() && isEnabled.value
+                    enableInput = (!isErrorStateName.value && !isErrorStateEmail.value && !isErrorStatePassword.value && !isErrorStateUsername.value && !isErrorStatePhoneNumber.value && date.value.isNotEmpty() && genderSelected.value.isNotEmpty() && nextButtonIsEnabled.value)
                 )
             }
         }

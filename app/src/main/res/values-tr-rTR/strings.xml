@@ -14,4 +14,9 @@
     <string name="next">Sonraki</string>
     <string name="surname">Soyad</string>
     <string name="thisEmailIsAlreadyInUse">Bu email zaten kullanımda.</string>
+    <string name="phoneNumber">Telefon Numarası</string>
+    <string name="thisUsernameIsAlreadyInUse">Bu kullanıcı adı zaten kullanımda.</string>
+    <string name="gender">Cinsiyet</string>
+    <string name="male">Erkek</string>
+    <string name="female">Kadın</string>
 </resources>

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WAS</string>
     <string name="username">Username</string>
+    <string name="phoneNumber">Phone Number</string>
     <string name="password">Password</string>
     <string name="login">Log In</string>
     <string name="signup">Sign Up</string>
@@ -10,8 +11,12 @@
     <string name="emailAddress">Email Address</string>
     <string name="previous">Previous</string>
     <string name="goBack">Go Back</string>
+    <string name="gender">Gender</string>
     <string name="birthday">Birthday</string>
     <string name="next">Next</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
     <string name="thisEmailIsAlreadyInUse">This email is already in use.</string>
+    <string name="thisUsernameIsAlreadyInUse">This username is already in use.</string>
     <string name="title_activity_register" translatable="false">RegisterActivity</string>
 </resources>
