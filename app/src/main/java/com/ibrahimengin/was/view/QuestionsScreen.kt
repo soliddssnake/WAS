@@ -14,17 +14,18 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.WASTheme
+import com.ibrahimengin.was.viewmodel.UserSharedViewModel
 
 @Composable
-fun QuestionsScreen(navController: NavController) {
+fun QuestionsScreen(navController: NavController, userSharedViewModel: UserSharedViewModel) {
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
-            modifier = Modifier.padding(horizontal = 5.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+                modifier = Modifier.padding(horizontal = 5.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
         ) {
-            Text("Hello Questions")
+            Text(userSharedViewModel.user!!.username)
         }
     }
 }
@@ -33,6 +34,6 @@ fun QuestionsScreen(navController: NavController) {
 @Composable
 fun PreviewQuestionsScreen() {
     WASTheme {
-        QuestionsScreen(rememberNavController())
+        QuestionsScreen(rememberNavController(), UserSharedViewModel())
     }
 }

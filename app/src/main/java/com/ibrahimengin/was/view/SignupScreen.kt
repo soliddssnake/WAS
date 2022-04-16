@@ -29,9 +29,11 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.ibrahimengin.was.R
 import com.ibrahimengin.was.ScreenHolder
+import com.ibrahimengin.was.model.User
+import com.ibrahimengin.was.viewmodel.UserSharedViewModel
 
 @Composable
-fun SignupScreen(navController: NavController) {
+fun SignupScreen(navController: NavController, userSharedViewModel: UserSharedViewModel) {
     val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark else R.drawable.was_logo_light
     val name = remember { mutableStateOf("") }
     val surname = remember { mutableStateOf("") }
@@ -159,15 +161,27 @@ fun SignupScreen(navController: NavController) {
                     {
                         nextButtonIsEnabled.value = false
 
-                        Firebase.firestore.collection("users").document(email.value).get().addOnSuccessListener {
+                        Firebase.firestore.collection("users").document(email.value).get().addOnSuccessListener { it ->
                             if (it.exists()) {
                                 Toast.makeText(context, emailValidationMessage, Toast.LENGTH_LONG).show()
                             } else {
                                 Firebase.firestore.collection("users").whereEqualTo("username", username.value).get()
-                                    .addOnSuccessListener {
-                                        if (it.documents.isEmpty()) {
-                                            navController.navigate(ScreenHolder.QuestionsScreen.toString())
-                                        } else {
+                                        .addOnSuccessListener {
+                                            if (it.documents.isEmpty()) {
+                                                userSharedViewModel.addUser(
+                                                        User(
+                                                                name.value,
+                                                                surname.value,
+                                                                username.value,
+                                                                phoneNumber.value,
+                                                                email.value,
+                                                                password.value,
+                                                                genderSelected.value,
+                                                                date.value
+                                                        )
+                                                )
+                                                navController.navigate(ScreenHolder.QuestionsScreen.toString())
+                                            } else {
                                             Toast.makeText(context, usernameValidationMessage, Toast.LENGTH_LONG).show()
                                         }
                                     }
@@ -194,6 +208,6 @@ fun SignupScreen(navController: NavController) {
 @Composable
 fun PreviewSignupScreen() {
     WASTheme {
-        SignupScreen(rememberNavController())
+        SignupScreen(rememberNavController(), UserSharedViewModel())
     }
 }
