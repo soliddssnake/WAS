@@ -30,10 +30,10 @@ import com.google.firebase.ktx.Firebase
 import com.ibrahimengin.was.R
 import com.ibrahimengin.was.ScreenHolder
 import com.ibrahimengin.was.model.User
-import com.ibrahimengin.was.viewmodel.UserSharedViewModel
+import com.ibrahimengin.was.viewmodel.SharedViewModel
 
 @Composable
-fun SignupScreen(navController: NavController, userSharedViewModel: UserSharedViewModel) {
+fun SignupScreen(navController: NavController, sharedViewModel: SharedViewModel) {
     val logo = if (isSystemInDarkTheme()) R.drawable.was_logo_dark else R.drawable.was_logo_light
     val name = remember { mutableStateOf("") }
     val surname = remember { mutableStateOf("") }
@@ -166,22 +166,22 @@ fun SignupScreen(navController: NavController, userSharedViewModel: UserSharedVi
                                 Toast.makeText(context, emailValidationMessage, Toast.LENGTH_LONG).show()
                             } else {
                                 Firebase.firestore.collection("users").whereEqualTo("username", username.value).get()
-                                        .addOnSuccessListener {
-                                            if (it.documents.isEmpty()) {
-                                                userSharedViewModel.addUser(
-                                                        User(
-                                                                name.value,
-                                                                surname.value,
-                                                                username.value,
-                                                                phoneNumber.value,
-                                                                email.value,
-                                                                password.value,
-                                                                genderSelected.value,
-                                                                date.value
-                                                        )
+                                    .addOnSuccessListener {
+                                        if (it.documents.isEmpty()) {
+                                            sharedViewModel.addUser(
+                                                User(
+                                                    name.value,
+                                                    surname.value,
+                                                    username.value,
+                                                    phoneNumber.value,
+                                                    email.value,
+                                                    password.value,
+                                                    genderSelected.value,
+                                                    date.value
                                                 )
-                                                navController.navigate(ScreenHolder.QuestionsScreen.toString())
-                                            } else {
+                                            )
+                                            navController.navigate(ScreenHolder.QuestionsScreen.toString())
+                                        } else {
                                             Toast.makeText(context, usernameValidationMessage, Toast.LENGTH_LONG).show()
                                         }
                                     }
@@ -208,6 +208,6 @@ fun SignupScreen(navController: NavController, userSharedViewModel: UserSharedVi
 @Composable
 fun PreviewSignupScreen() {
     WASTheme {
-        SignupScreen(rememberNavController(), UserSharedViewModel())
+        SignupScreen(rememberNavController(), SharedViewModel())
     }
 }

@@ -13,10 +13,21 @@
     <string name="birthday">Doğum Günü</string>
     <string name="next">Sonraki</string>
     <string name="surname">Soyad</string>
-    <string name="thisEmailIsAlreadyInUse">Bu email zaten kullanımda.</string>
+    <string name="thisEmailIsAlreadyInUse">Bu email zaten kullanımda!</string>
     <string name="phoneNumber">Telefon Numarası</string>
-    <string name="thisUsernameIsAlreadyInUse">Bu kullanıcı adı zaten kullanımda.</string>
+    <string name="thisUsernameIsAlreadyInUse">Bu kullanıcı adı zaten kullanımda!</string>
     <string name="gender">Cinsiyet</string>
     <string name="male">Erkek</string>
     <string name="female">Kadın</string>
+    <string name="fieldQuestion">Hangi alanda faaliyet gösteren derneklerle ilgileniyorsunuz?</string>
+    <string name="professionalAndSolidarityAssociation">mesleki ve dayanışma dernekleri</string>
+    <string name="educationalResearchAssociations">eğitim araştırma dernekleri</string>
+    <string name="healthcareAssociations">sağlık alanı dernekleri</string>
+    <string name="sportsAndSportsRelatedAssociation">spor ve spor ile ilgili dernekler</string>
+    <string name="cultureArtAndTourismAssociation">kültür, sanat ve turizm dernekleri</string>
+    <string name="animalProtectionAssociations">hayvanları koruma dernekleri</string>
+    <string name="disabilityAssociations">engelli dernekleri</string>
+    <string name="IamNotInterested">İlgilenmiyorum</string>
+    <string name="save">Kayıt Ol</string>
+    <string name="successful">Başarılı!</string>
 </resources>
