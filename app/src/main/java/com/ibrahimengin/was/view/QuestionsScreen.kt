@@ -72,21 +72,23 @@ fun QuestionsScreen(navController: NavController, sharedViewModel: SharedViewMod
                 )
                 ButtonTrailingIcon(
                     {
-                        sharedViewModel.user!!.fieldQuestion = selectedAnswer.value
-                        Firebase.firestore.collection("users").document(sharedViewModel.user!!.email)
-                            .set(sharedViewModel.user!!).addOnSuccessListener {
+                        val accessSVM = sharedViewModel.user!!
+                        accessSVM.fieldQuestion = selectedAnswer.value
+
+                        Firebase.firestore.collection("users").document(accessSVM.email)
+                            .set(accessSVM).addOnSuccessListener {
                                 Firebase.auth.createUserWithEmailAndPassword(
-                                    sharedViewModel.user!!.email,
-                                    sharedViewModel.user!!.password
+                                    accessSVM.email,
+                                    accessSVM.password
                                 ).addOnSuccessListener {
                                     Toast.makeText(context, successMessage, Toast.LENGTH_LONG)
                                         .show()
-                                }
-                                navController.navigate(ScreenHolder.LoginScreen.toString()) {
-                                    popUpTo(ScreenHolder.LoginScreen.toString()) {
-                                        inclusive = true
+                                    navController.navigate(ScreenHolder.LoginScreen.toString()) {
+                                        popUpTo(ScreenHolder.LoginScreen.toString()) {
+                                            inclusive = true
+                                        }
                                     }
-                                }
+                                }//TODO Failure ve butona tekrar tıklamayı önle loginde de aynı
                             }
                     },
                     stringResource(R.string.signup),

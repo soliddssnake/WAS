@@ -17,6 +17,7 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="successful">Successful!</string>
+    <string name="emailOrPasswordIsIncorrect">Email or password is incorrect!</string>
     <string name="professionalAndSolidarityAssociation">professional and solidarity associations</string>
     <string name="educationalResearchAssociations">educational research associations</string>
     <string name="healthcareAssociations">healthcare associations</string>
@@ -28,5 +29,4 @@
     <string name="thisEmailIsAlreadyInUse">This email is already in use!</string>
     <string name="thisUsernameIsAlreadyInUse">This username is already in use!</string>
     <string name="fieldQuestion">In which field are you interested in associations operating?</string>
-    <string name="title_activity_register" translatable="false">RegisterActivity</string>
 </resources>

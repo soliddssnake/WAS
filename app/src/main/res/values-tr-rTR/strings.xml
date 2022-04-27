@@ -28,6 +28,6 @@
     <string name="animalProtectionAssociations">hayvanları koruma dernekleri</string>
     <string name="disabilityAssociations">engelli dernekleri</string>
     <string name="IamNotInterested">İlgilenmiyorum</string>
-    <string name="save">Kayıt Ol</string>
     <string name="successful">Başarılı!</string>
+    <string name="emailOrPasswordIsIncorrect">Email veya şifre hatalı!</string>
 </resources>

@@ -5,6 +5,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.ibrahimengin.was.view.LoginScreen
 import com.ibrahimengin.was.view.MainScreen
 import com.ibrahimengin.was.view.QuestionsScreen
@@ -15,8 +17,13 @@ import com.ibrahimengin.was.viewmodel.SharedViewModel
 fun SetupNavGraph(navController: NavHostController) {
 
     val sharedViewModel: SharedViewModel = viewModel()
+    val currentUser = Firebase.auth.currentUser
+    var myStartDestination = ScreenHolder.LoginScreen.toString()
+    if (currentUser != null) {
+        myStartDestination = ScreenHolder.MainScreen.toString()
+    }
 
-    NavHost(navController = navController, startDestination = ScreenHolder.LoginScreen.toString()) {
+    NavHost(navController = navController, startDestination = myStartDestination) {
         composable(
             route = ScreenHolder.LoginScreen.toString()
         ) {
