@@ -30,4 +30,7 @@
     <string name="IamNotInterested">İlgilenmiyorum</string>
     <string name="successful">Başarılı!</string>
     <string name="emailOrPasswordIsIncorrect">Email veya şifre hatalı!</string>
+    <string name="resetPasswordForEmail">Şifrenizi yenilemek için lütfen email adresinizi girin</string>
+    <string name="send">Gönder</string>
+    <string name="sent">Gönderildi</string>
 </resources>

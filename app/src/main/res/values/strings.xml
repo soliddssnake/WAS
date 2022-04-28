@@ -15,9 +15,14 @@
     <string name="birthday">Birthday</string>
     <string name="next">Next</string>
     <string name="male">Male</string>
+    <string name="send">Send</string>
+    <string name="sent">Sent</string>
     <string name="female">Female</string>
     <string name="successful">Successful!</string>
     <string name="emailOrPasswordIsIncorrect">Email or password is incorrect!</string>
+    <string name="thisEmailIsAlreadyInUse">This email is already in use!</string>
+    <string name="thisUsernameIsAlreadyInUse">This username is already in use!</string>
+
     <string name="professionalAndSolidarityAssociation">professional and solidarity associations</string>
     <string name="educationalResearchAssociations">educational research associations</string>
     <string name="healthcareAssociations">healthcare associations</string>
@@ -26,7 +31,7 @@
     <string name="animalProtectionAssociations">animal protection associations</string>
     <string name="disabilityAssociations">disability associations</string>
     <string name="IamNotInterested">I am not interested</string>
-    <string name="thisEmailIsAlreadyInUse">This email is already in use!</string>
-    <string name="thisUsernameIsAlreadyInUse">This username is already in use!</string>
+
     <string name="fieldQuestion">In which field are you interested in associations operating?</string>
+    <string name="resetPasswordForEmail">Please enter your email address for reset your password</string>
 </resources>

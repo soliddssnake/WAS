@@ -5,4 +5,5 @@ sealed class ScreenHolder(route: String) {
     object LoginScreen : ScreenHolder(route = "login_screen")
     object QuestionsScreen : ScreenHolder(route = "questions_screen")
     object MainScreen : ScreenHolder(route = "main_screen")
+    object ForgotPasswordScreen : ScreenHolder(route = "forgot_password_screen")
 }

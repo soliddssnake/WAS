@@ -7,10 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.ibrahimengin.was.view.LoginScreen
-import com.ibrahimengin.was.view.MainScreen
-import com.ibrahimengin.was.view.QuestionsScreen
-import com.ibrahimengin.was.view.SignupScreen
+import com.ibrahimengin.was.view.*
 import com.ibrahimengin.was.viewmodel.SharedViewModel
 
 @Composable
@@ -43,6 +40,11 @@ fun SetupNavGraph(navController: NavHostController) {
             route = ScreenHolder.MainScreen.toString()
         ) {
             MainScreen(navController)
+        }
+        composable(
+            route = ScreenHolder.ForgotPasswordScreen.toString()
+        ) {
+            ForgotPasswordScreen(navController)
         }
     }
 }
