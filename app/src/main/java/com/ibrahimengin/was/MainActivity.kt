@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.compose.WASTheme
+import com.ibrahimengin.was.view.MainScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -15,8 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             WASTheme {
-                navController = rememberNavController()
-                SetupNavGraph(navController)
+                MainScreen()
             }
         }
     }

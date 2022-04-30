@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.util.PatternsCompat
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.WASTheme
 import com.google.firebase.auth.ktx.auth
@@ -59,13 +60,13 @@ fun LoginScreen(navController: NavController) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                 Text(
                     stringResource(R.string.forgotPassword),
-                    modifier = Modifier.clickable { navController.navigate(ScreenHolder.ForgotPasswordScreen.toString()) })
+                    modifier = Modifier.clickable { navController.navigate(ScreenHolder.ForgotPasswordScreen.route) })
                 Spacer(modifier = Modifier.width(8.dp))
             }
             Spacer(modifier = Modifier.height(15.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
                 ButtonTrailingIcon(
-                    { navController.navigate(ScreenHolder.SignupScreen.toString()) },
+                    { navController.navigate(ScreenHolder.SignupScreen.route) },
                     stringResource(R.string.signup),
                     Icons.Filled.PersonAddAlt1,
                     stringResource(R.string.signup),
@@ -78,8 +79,8 @@ fun LoginScreen(navController: NavController) {
                             Toast.makeText(context, warningMessage, Toast.LENGTH_LONG).show()
                         } else {
                             auth.signInWithEmailAndPassword(email.value, password.value).addOnSuccessListener {
-                                navController.navigate(ScreenHolder.MainScreen.toString()) {
-                                    popUpTo(ScreenHolder.MainScreen.toString()) {
+                                navController.navigate(ScreenHolder.MainScreen.route) {
+                                    popUpTo(navController.graph.findStartDestination().id) {
                                         inclusive = true
                                     }
                                 }

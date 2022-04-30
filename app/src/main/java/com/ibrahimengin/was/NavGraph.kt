@@ -15,36 +15,56 @@ fun SetupNavGraph(navController: NavHostController) {
 
     val sharedViewModel: SharedViewModel = viewModel()
     val currentUser = Firebase.auth.currentUser
-    var myStartDestination = ScreenHolder.LoginScreen.toString()
+    var myStartDestination = ScreenHolder.LoginScreen.route
     if (currentUser != null) {
-        myStartDestination = ScreenHolder.MainScreen.toString()
+        myStartDestination = ScreenHolder.HomeScreen.route
     }
 
     NavHost(navController = navController, startDestination = myStartDestination) {
         composable(
-            route = ScreenHolder.LoginScreen.toString()
+            route = ScreenHolder.LoginScreen.route
         ) {
             LoginScreen(navController)
         }
         composable(
-            route = ScreenHolder.SignupScreen.toString()
+            route = ScreenHolder.SignupScreen.route
         ) {
             SignupScreen(navController, sharedViewModel)
         }
         composable(
-            route = ScreenHolder.QuestionsScreen.toString()
+            route = ScreenHolder.QuestionsScreen.route
         ) {
             QuestionsScreen(navController, sharedViewModel)
         }
         composable(
-            route = ScreenHolder.MainScreen.toString()
+            route = ScreenHolder.HomeScreen.route
         ) {
-            MainScreen(navController)
+            HomeScreen()
         }
         composable(
-            route = ScreenHolder.ForgotPasswordScreen.toString()
+            route = ScreenHolder.ForgotPasswordScreen.route
         ) {
             ForgotPasswordScreen(navController)
+        }
+        composable(
+            route = ScreenHolder.SearchScreen.route
+        ) {
+            LoginScreen(navController)
+        }
+        composable(
+            route = ScreenHolder.ProfileScreen.route
+        ) {
+            ProfileScreen()
+        }
+        composable(
+            route = ScreenHolder.MessagesScreen.route
+        ) {
+            HomeScreen()
+        }
+        composable(
+            route = ScreenHolder.MainScreen.route
+        ) {
+            MainScreen()
         }
     }
 }

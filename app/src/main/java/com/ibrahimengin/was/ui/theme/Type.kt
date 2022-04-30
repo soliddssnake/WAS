@@ -1,12 +1,18 @@
 package com.example.ui.theme
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.ibrahimengin.was.R
 
 //Replace with your font locations
 val Roboto = FontFamily.Default
+val Pacifico = FontFamily(
+	Font(R.font.pacifico_regular)
+)
+
 
 val AppTypography = Typography(
 	h6 = TextStyle(
@@ -31,7 +37,7 @@ val AppTypography = Typography(
 		letterSpacing = 0.sp,
 	),
 	h3 = TextStyle(
-		fontFamily = Roboto,
+		fontFamily = Pacifico,
 		fontWeight = FontWeight.W400,
 		fontSize = 32.sp,
 		lineHeight = 40.sp,
