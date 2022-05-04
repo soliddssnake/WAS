@@ -155,7 +155,7 @@ fun ForgotPasswordScreen(navController: NavController) {
 @Composable
 fun PreviewLoginScreen() {
     WASTheme {
-        //LoginScreen(navController = rememberNavController())
-        ForgotPasswordScreen(navController = rememberNavController())
+        LoginScreen(navController = rememberNavController())
+        //ForgotPasswordScreen(navController = rememberNavController())
     }
 }

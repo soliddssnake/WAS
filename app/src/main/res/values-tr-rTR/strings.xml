@@ -33,4 +33,8 @@
     <string name="resetPasswordForEmail">Şifrenizi yenilemek için lütfen email adresinizi girin</string>
     <string name="send">Gönder</string>
     <string name="sent">Gönderildi</string>
+    <string name="addPost">Gönderi Ekle</string>
+    <string name="notifications">Bildirimler</string>
+    <string name="like">Beğen</string>
+    <string name="comment">Yorum</string>
 </resources>

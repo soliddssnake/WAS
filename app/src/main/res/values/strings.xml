@@ -18,6 +18,10 @@
     <string name="send">Send</string>
     <string name="sent">Sent</string>
     <string name="female">Female</string>
+    <string name="like">Like</string>
+    <string name="comment">Comment</string>
+    <string name="addPost">Add Post</string>
+    <string name="notifications">Notifications</string>
     <string name="successful">Successful!</string>
     <string name="emailOrPasswordIsIncorrect">Email or password is incorrect!</string>
     <string name="thisEmailIsAlreadyInUse">This email is already in use!</string>
