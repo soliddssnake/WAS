@@ -38,4 +38,6 @@
 
     <string name="fieldQuestion">In which field are you interested in associations operating?</string>
     <string name="resetPasswordForEmail">Please enter your email address for reset your password</string>
+
+    <string name="shareWithUs">Share With Us</string>
 </resources>

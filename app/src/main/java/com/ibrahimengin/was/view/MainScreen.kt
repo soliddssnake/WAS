@@ -1,9 +1,12 @@
 package com.ibrahimengin.was.view
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -21,11 +24,19 @@ import com.ibrahimengin.was.SetupNavGraph
 fun MainScreen() {
     val currentUser = Firebase.auth.currentUser
     val navController: NavHostController = rememberNavController()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
     if (currentUser != null) {
         Scaffold(bottomBar = {
-            BottomBar(navController = navController)
-        }) {
-            SetupNavGraph(navController = navController)
+            when (navBackStackEntry?.destination?.route) {
+                "add_post_screen" -> {}
+                else -> {
+                    BottomBar(navController = navController)
+                }
+            }
+
+        }) { innerPadding ->
+            Box(modifier = Modifier.padding(innerPadding)) { SetupNavGraph(navController = navController) }
+
         }
     } else {
         Scaffold {

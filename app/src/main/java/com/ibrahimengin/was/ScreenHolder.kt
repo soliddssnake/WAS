@@ -15,9 +15,13 @@ sealed class ScreenHolder(
     object LoginScreen : ScreenHolder(route = "login_screen")
     object QuestionsScreen : ScreenHolder(route = "questions_screen")
     object MainScreen : ScreenHolder(route = "main_screen")
-    object HomeScreen : ScreenHolder(route = "home_screen", icon = Icons.Filled.Home)
     object ForgotPasswordScreen : ScreenHolder(route = "forgot_password_screen")
+
+    //BottomNavigation
+    object HomeScreen : ScreenHolder(route = "home_screen", icon = Icons.Filled.Home)
     object SearchScreen : ScreenHolder(route = "search_screen", icon = Icons.Filled.Search)
     object ProfileScreen : ScreenHolder(route = "profile_screen", icon = Icons.Filled.Person)
     object MessagesScreen : ScreenHolder(route = "messages_screen", icon = Icons.Filled.Message)
+
+    object AddPostScreen : ScreenHolder(route = "add_post_screen")
 }

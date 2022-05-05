@@ -2,6 +2,7 @@ package com.ibrahimengin.was.view
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -17,7 +18,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.WASTheme
@@ -53,7 +53,7 @@ fun QuestionsScreen(navController: NavController, sharedViewModel: SharedViewMod
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(stringResource(R.string.fieldQuestion), fontSize = 18.sp)
+            Text(stringResource(R.string.fieldQuestion), style = MaterialTheme.typography.subtitle1)
             Dropdown(
                 selectedAnswer, { selectedAnswer.value = it }, answerExpandState,
                 fieldQuestionList, ""

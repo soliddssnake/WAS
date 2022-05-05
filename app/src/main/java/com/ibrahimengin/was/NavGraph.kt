@@ -41,7 +41,7 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(
             route = ScreenHolder.HomeScreen.route
         ) {
-            HomeScreen(postListViewModel)
+            HomeScreen(navController, postListViewModel)
         }
         composable(
             route = ScreenHolder.ForgotPasswordScreen.route
@@ -61,12 +61,17 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(
             route = ScreenHolder.MessagesScreen.route
         ) {
-            HomeScreen(postListViewModel)
+            HomeScreen(navController, postListViewModel)
         }
         composable(
             route = ScreenHolder.MainScreen.route
         ) {
             MainScreen()
+        }
+        composable(
+            route = ScreenHolder.AddPostScreen.route
+        ) {
+            AddPostView(navController, postListViewModel)
         }
     }
 }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ModeComment
@@ -30,6 +31,9 @@ fun PostItemRow(postListItem: PostListItem) {
             CustomImage(R.drawable.was_logo, null, 50.dp, 50.dp)
             Text(postListItem.username)
         }
+
+        Text(postListItem.explanation, style = MaterialTheme.typography.body1)
+
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
             IconButton(onClick = {}) {
                 Icon(imageVector = Icons.Outlined.ThumbUp, contentDescription = stringResource(R.string.like))
