@@ -51,7 +51,7 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(
             route = ScreenHolder.SearchScreen.route
         ) {
-            LoginScreen(navController)
+            SearchScreen()
         }
         composable(
             route = ScreenHolder.ProfileScreen.route
@@ -61,7 +61,7 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(
             route = ScreenHolder.MessagesScreen.route
         ) {
-            HomeScreen(navController, postListViewModel)
+            MessagesScreen()
         }
         composable(
             route = ScreenHolder.MainScreen.route

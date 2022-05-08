@@ -116,7 +116,7 @@ fun AddPostView(navController: NavController, viewModel: PostListViewModel) {
                             }.addOnFailureListener {
                                 Toast.makeText(context, it.localizedMessage, Toast.LENGTH_LONG).show()
                             }
-                            viewModel.loadPosts()
+
                         }) {
                             Icon(
                                 imageVector = Icons.Filled.Done,

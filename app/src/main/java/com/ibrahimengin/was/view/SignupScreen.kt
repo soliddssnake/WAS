@@ -180,7 +180,7 @@ fun SignupScreen(navController: NavController, sharedViewModel: SharedViewModel)
                                                     date.value
                                                 )
                                             )
-                                            navController.navigate(ScreenHolder.QuestionsScreen.toString())
+                                            navController.navigate(ScreenHolder.QuestionsScreen.route)
                                         } else {
                                             Toast.makeText(context, usernameValidationMessage, Toast.LENGTH_LONG).show()
                                         }

@@ -11,12 +11,16 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ModeComment
 import androidx.compose.material.icons.outlined.ThumbUp
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.compose.WASTheme
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.ibrahimengin.was.R
 import com.ibrahimengin.was.model.PostListItem
 import com.ibrahimengin.was.viewmodel.PostListViewModel
@@ -52,9 +56,13 @@ fun PostItemRow(postListItem: PostListItem) {
 @Composable
 fun PostListLazyView(viewModel: PostListViewModel) {
     val list = viewModel.postList
-    LazyColumn {
-        items(items = list) { post ->
-            PostItemRow(post)
+    val isRefreshing by viewModel.isRefreshing.collectAsState()
+    SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing),
+        onRefresh = { viewModel.refresh(list) }) {
+        LazyColumn {
+            items(items = list) { post ->
+                PostItemRow(post)
+            }
         }
     }
 }

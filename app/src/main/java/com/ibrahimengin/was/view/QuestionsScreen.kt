@@ -83,8 +83,8 @@ fun QuestionsScreen(navController: NavController, sharedViewModel: SharedViewMod
                                 ).addOnSuccessListener {
                                     Toast.makeText(context, successMessage, Toast.LENGTH_LONG)
                                         .show()
-                                    navController.navigate(ScreenHolder.LoginScreen.toString()) {
-                                        popUpTo(ScreenHolder.LoginScreen.toString()) {
+                                    navController.navigate(ScreenHolder.LoginScreen.route) {
+                                        popUpTo(ScreenHolder.LoginScreen.route) {
                                             inclusive = true
                                         }
                                     }

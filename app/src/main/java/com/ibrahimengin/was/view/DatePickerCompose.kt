@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.compose.WASTheme
 import com.ibrahimengin.was.ui.theme.Shapes
+import java.text.SimpleDateFormat
 import java.util.*
 
 @Composable
@@ -39,7 +40,12 @@ fun DatePickField(
     calendar.time = Date()
 
     val datePickerDialog = DatePickerDialog(context, { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
-        date.value = "$dayOfMonth/$month/$year"
+        calendar.set(Calendar.YEAR, year)
+        calendar.set(Calendar.MONTH, month)
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        val myFormat = "dd/MM/yy"
+        val simpleDateFormat = SimpleDateFormat(myFormat, Locale.US)
+        date.value = simpleDateFormat.format(calendar.time)
     }, year, month, day)
 
     OutlinedTextField(value = date.value,

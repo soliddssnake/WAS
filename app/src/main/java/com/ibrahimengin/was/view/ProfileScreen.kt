@@ -17,3 +17,23 @@ fun ProfileScreen() {
         Text("PROFILE", style = MaterialTheme.typography.h3)
     }
 }
+
+@Composable
+fun SearchScreen() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text("SEARCH", style = MaterialTheme.typography.h3)
+    }
+}
+
+@Composable
+fun MessagesScreen() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text("MESSAGES", style = MaterialTheme.typography.h3)
+    }
+}
