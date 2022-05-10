@@ -21,6 +21,7 @@
     <string name="like">Like</string>
     <string name="comment">Comment</string>
     <string name="addPost">Add Post</string>
+    <string name="profilePhoto">Profile Photo</string>
     <string name="notifications">Notifications</string>
     <string name="successful">Successful!</string>
     <string name="emailOrPasswordIsIncorrect">Email or password is incorrect!</string>

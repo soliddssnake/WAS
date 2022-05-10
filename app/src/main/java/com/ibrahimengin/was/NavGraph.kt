@@ -56,7 +56,7 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(
             route = ScreenHolder.ProfileScreen.route
         ) {
-            ProfileScreen()
+            ProfileScreen(navController, postListViewModel)
         }
         composable(
             route = ScreenHolder.MessagesScreen.route

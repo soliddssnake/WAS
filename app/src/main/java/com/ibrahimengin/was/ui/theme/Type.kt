@@ -80,7 +80,7 @@ val AppTypography = Typography(
 	),
 	body2 = TextStyle(
 		fontFamily = Roboto,
-		fontWeight = FontWeight.W400,
+		fontWeight = FontWeight.Bold,
 		fontSize = 16.sp,
 		lineHeight = 24.sp,
 		letterSpacing = 0.5.sp,

@@ -11,6 +11,7 @@ import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImagePainter
 import com.ibrahimengin.was.R
 
 @Composable
@@ -29,6 +30,25 @@ fun CustomImage(
         contentDescription = descriptionImage,
         modifier = Modifier.size(width, height)
             .padding(start = paddingStart!!, top = paddingTop!!, end = paddingEnd!!, bottom = paddingBottom!!)
+    )
+}
+
+@Composable
+fun DownloadImage(
+    painter: AsyncImagePainter,
+    descriptionImage: String?,
+    height: Dp,
+    width: Dp,
+    paddingStart: Dp? = 0.dp,
+    paddingTop: Dp? = 0.dp,
+    paddingEnd: Dp? = 0.dp,
+    paddingBottom: Dp? = 0.dp
+) {
+    Image(
+        painter = painter,
+        contentDescription = descriptionImage,
+        modifier = Modifier.size(width, height)
+            .padding(start = paddingStart!!, top = paddingTop!!, end = paddingEnd!!, bottom = paddingBottom!!),
     )
 }
 

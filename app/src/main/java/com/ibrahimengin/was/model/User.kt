@@ -15,5 +15,6 @@ data class User(
     val password: String = "",
     val gender: String = "",
     val birthday: String = "",
-    var fieldQuestion: String? = ""
+    var fieldQuestion: String? = "",
+    val profilePhotoUrl: String? = ""
 ) : Parcelable

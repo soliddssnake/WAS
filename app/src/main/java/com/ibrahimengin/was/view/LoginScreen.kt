@@ -86,7 +86,6 @@ fun LoginScreen(navController: NavController) {
                                 }
                             }.addOnFailureListener {
                                 Toast.makeText(context, it.localizedMessage, Toast.LENGTH_LONG).show()
-                                //TODO string resource olması lazım
                             }
                         }
                     }, stringResource(R.string.login), Icons.Filled.Login, stringResource(R.string.login)

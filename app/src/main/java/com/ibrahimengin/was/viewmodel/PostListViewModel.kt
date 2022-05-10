@@ -16,15 +16,19 @@ import kotlinx.coroutines.launch
 
 class PostListViewModel : ViewModel() {
     var username = ""
+    var profilePhotoUrl = ""
+    var name = ""
+    var surname = ""
     var postList = mutableStateListOf<PostListItem>()
-    private val db = Firebase.firestore.collection("posts")
+    private val dbPost = Firebase.firestore.collection("posts")
+    private val dbUser = Firebase.firestore.collection("users")
+    private val _isRefreshing = MutableStateFlow(false)
+    private val currentUser = Firebase.auth.currentUser
 
     init {
         loadPosts()
-        getUsername()
+        getCurrentUserData()
     }
-
-    private val _isRefreshing = MutableStateFlow(false)
 
     val isRefreshing: StateFlow<Boolean>
         get() = _isRefreshing.asStateFlow()
@@ -50,7 +54,7 @@ class PostListViewModel : ViewModel() {
     }
 
     private fun loadPosts() {
-        db.get().addOnSuccessListener { documents ->
+        dbPost.get().addOnSuccessListener { documents ->
             for (document in documents) {
                 val username = document.get("username") as String
                 val explanation = document.get("explanation") as String
@@ -61,12 +65,14 @@ class PostListViewModel : ViewModel() {
         }
     }
 
-    private fun getUsername() {
-        val currentUser = Firebase.auth.currentUser
+    private fun getCurrentUserData() {
         if (currentUser != null) {
             val currentEmail = currentUser.email
-            Firebase.firestore.collection("users").document(currentEmail!!).get().addOnSuccessListener {
+            dbUser.document(currentEmail!!).get().addOnSuccessListener {
                 username = it.get("username") as String
+                profilePhotoUrl = it.get("profilePhotoUrl") as String
+                name = it.get("name") as String
+                surname = it.get("surname") as String
             }
         }
     }
