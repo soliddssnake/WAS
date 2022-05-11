@@ -29,6 +29,7 @@ fun MainScreen() {
         Scaffold(bottomBar = {
             when (navBackStackEntry?.destination?.route) {
                 "add_post_screen" -> {}
+                "login_screen" -> {}
                 else -> {
                     BottomBar(navController = navController)
                 }

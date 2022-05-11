@@ -54,7 +54,7 @@ fun QuestionsScreen(navController: NavController, sharedViewModel: SharedViewMod
             verticalArrangement = Arrangement.Center
         ) {
             Text(stringResource(R.string.fieldQuestion), style = MaterialTheme.typography.subtitle1)
-            Dropdown(
+            DropdownText(
                 selectedAnswer, { selectedAnswer.value = it }, answerExpandState,
                 fieldQuestionList, ""
             )

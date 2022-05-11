@@ -15,10 +15,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class PostListViewModel : ViewModel() {
-    var username = ""
-    var profilePhotoUrl = ""
-    var name = ""
-    var surname = ""
+    var currentUsername = ""
+    var currentProfilePhotoUrl = ""
+    var currentName = ""
+    var currentSurname = ""
     var postList = mutableStateListOf<PostListItem>()
     private val dbPost = Firebase.firestore.collection("posts")
     private val dbUser = Firebase.firestore.collection("users")
@@ -58,8 +58,9 @@ class PostListViewModel : ViewModel() {
             for (document in documents) {
                 val username = document.get("username") as String
                 val explanation = document.get("explanation") as String
+                val profilePhotoUrl = document.get("profilePhotoUrl") as String
 
-                val post = PostListItem(username, explanation)
+                val post = PostListItem(username, explanation, profilePhotoUrl)
                 postList.add(post)
             }
         }
@@ -69,10 +70,10 @@ class PostListViewModel : ViewModel() {
         if (currentUser != null) {
             val currentEmail = currentUser.email
             dbUser.document(currentEmail!!).get().addOnSuccessListener {
-                username = it.get("username") as String
-                profilePhotoUrl = it.get("profilePhotoUrl") as String
-                name = it.get("name") as String
-                surname = it.get("surname") as String
+                currentUsername = it.get("username") as String
+                currentProfilePhotoUrl = it.get("profilePhotoUrl") as String
+                currentName = it.get("name") as String
+                currentSurname = it.get("surname") as String
             }
         }
     }

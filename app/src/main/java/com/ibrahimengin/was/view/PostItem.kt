@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.example.compose.WASTheme
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -28,11 +29,14 @@ import com.ibrahimengin.was.viewmodel.PostListViewModel
 @Composable
 fun PostItemRow(postListItem: PostListItem) {
 
+    val pp = rememberAsyncImagePainter(model = postListItem.profilePhotoUrl)
+
     Column(
         modifier = Modifier.padding(horizontal = 5.dp).fillMaxWidth().wrapContentHeight()
     ) {
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            CustomImage(R.drawable.was_logo, null, 50.dp, 50.dp)
+            ProfileImage(pp, 35.dp, 35.dp)
+            Spacer(Modifier.width(5.dp))
             Text(postListItem.username)
         }
 
@@ -41,7 +45,7 @@ fun PostItemRow(postListItem: PostListItem) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
             IconButton(onClick = {}) {
                 Icon(imageVector = Icons.Outlined.ThumbUp, contentDescription = stringResource(R.string.like))
-            }
+            }//TODO
             IconButton(onClick = {}) {
                 Icon(
                     imageVector = Icons.Outlined.ModeComment,
@@ -59,7 +63,7 @@ fun PostListLazyView(viewModel: PostListViewModel) {
     val isRefreshing by viewModel.isRefreshing.collectAsState()
     SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing),
         onRefresh = { viewModel.refresh(list) }) {
-        LazyColumn {
+        LazyColumn(contentPadding = PaddingValues(vertical = 5.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
             items(items = list) { post ->
                 PostItemRow(post)
             }

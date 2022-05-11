@@ -39,4 +39,8 @@
     <string name="comment">Yorum</string>
     <string name="shareWithUs">Bizimle Paylaş</string>
     <string name="profilePhoto">Profil Fotoğrafı</string>
+    <string name="logout">Çıkış Yap</string>
+    <string name="editProfile">Profili Düzenle</string>
+    <string name="more">Daha Fazla</string>
+    <string name="blankWarning">Bu alan boş bırakılamaz!</string>
 </resources>

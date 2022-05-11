@@ -137,7 +137,7 @@ fun SignupScreen(navController: NavController, sharedViewModel: SharedViewModel)
             )
             DatePickField(stringResource(R.string.birthday), Icons.Filled.Cake, stringResource(R.string.birthday), date)
 
-            Dropdown(
+            DropdownText(
                 genderSelected,
                 { genderSelected.value = it },
                 genderExpandState,

@@ -67,7 +67,7 @@ fun PasswordField(
 }
 
 @Composable
-fun Dropdown(
+fun DropdownText(
     selectedText: MutableState<String>,
     onValueChangeFunc: (String) -> Unit,
     expanded: MutableState<Boolean>,
@@ -82,19 +82,23 @@ fun Dropdown(
             label = { Text(labelText) },
             enabled = false
         )
+        CustomDropDownMenu(selectedText = selectedText, expanded = expanded, suggestions = suggestions)
+    }
+}
 
-        DropdownMenu(expanded = expanded.value, onDismissRequest = { expanded.value = false }) {
-            suggestions.forEach { label ->
-                DropdownMenuItem(onClick = {
-                    selectedText.value = label
-                    expanded.value = false
-                }) {
-                    Text(text = label)
-                }
+@Composable
+fun CustomDropDownMenu(selectedText: MutableState<String>, expanded: MutableState<Boolean>, suggestions: List<String>) {
+    DropdownMenu(expanded = expanded.value, onDismissRequest = { expanded.value = false }) {
+        suggestions.forEach { label ->
+            DropdownMenuItem(onClick = {
+                selectedText.value = label
+                expanded.value = false
+            }) {
+                Text(text = label)
             }
+            Divider()
         }
     }
-
 }
 
 @Preview

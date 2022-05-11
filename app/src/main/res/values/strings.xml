@@ -4,6 +4,7 @@
     <string name="phoneNumber">Phone Number</string>
     <string name="password">Password</string>
     <string name="login">Log In</string>
+    <string name="logout">Log Out</string>
     <string name="signup">Sign Up</string>
     <string name="forgotPassword">Forgot password?</string>
     <string name="name">Name</string>
@@ -20,13 +21,16 @@
     <string name="female">Female</string>
     <string name="like">Like</string>
     <string name="comment">Comment</string>
+    <string name="more">More</string>
     <string name="addPost">Add Post</string>
     <string name="profilePhoto">Profile Photo</string>
+    <string name="editProfile">Edit Profile</string>
     <string name="notifications">Notifications</string>
     <string name="successful">Successful!</string>
     <string name="emailOrPasswordIsIncorrect">Email or password is incorrect!</string>
     <string name="thisEmailIsAlreadyInUse">This email is already in use!</string>
     <string name="thisUsernameIsAlreadyInUse">This username is already in use!</string>
+    <string name="blankWarning">This field cannot be left blank!</string>
 
     <string name="professionalAndSolidarityAssociation">professional and solidarity associations</string>
     <string name="educationalResearchAssociations">educational research associations</string>
