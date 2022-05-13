@@ -14,12 +14,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class PostListViewModel : ViewModel() {
-    var currentUsername = ""
-    var currentProfilePhotoUrl = ""
-    var currentName = ""
-    var currentSurname = ""
-    var postList = mutableStateListOf<PostListItem>()
+class ProfilePostListVM : ViewModel() {
+    private var currentUsername = ""
+    var currentPostList = mutableStateListOf<PostListItem>()
     private val dbPost = Firebase.firestore.collection("posts")
     private val dbUser = Firebase.firestore.collection("users")
     private val _isRefreshing = MutableStateFlow(false)
@@ -29,7 +26,6 @@ class PostListViewModel : ViewModel() {
 
     init {
         loadPosts()
-        getCurrentUserData()
     }
 
     fun refresh(myList: SnapshotStateList<PostListItem>) {
@@ -47,33 +43,29 @@ class PostListViewModel : ViewModel() {
         addAll(newList)
     }
 
-    private fun getPostListItem(): List<PostListItem> {
-        loadPosts()
-        return postList
-    }
-
     private fun loadPosts() {
-        dbPost.get().addOnSuccessListener { documents ->
-            for (document in documents) {
-                val username = document.get("username") as String
-                val explanation = document.get("explanation") as String
-                val profilePhotoUrl = document.get("profilePhotoUrl") as String
 
-                val post = PostListItem(username, explanation, profilePhotoUrl)
-                postList.add(post)
-            }
-        }
-    }
-
-    private fun getCurrentUserData() {
         if (currentUser != null) {
             val currentEmail = currentUser.email
             dbUser.document(currentEmail!!).get().addOnSuccessListener {
                 currentUsername = it.get("username") as String
-                currentProfilePhotoUrl = it.get("profilePhotoUrl") as String
-                currentName = it.get("name") as String
-                currentSurname = it.get("surname") as String
+                dbPost.whereEqualTo("username", currentUsername).get().addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        val username = document.get("username") as String
+                        val explanation = document.get("explanation") as String
+                        val profilePhotoUrl = document.get("profilePhotoUrl") as String
+
+                        val post = PostListItem(username, explanation, profilePhotoUrl)
+                        currentPostList.add(post)
+                    }
+                }
             }
         }
     }
+
+    private fun getPostListItem(): List<PostListItem> {
+        loadPosts()
+        return currentPostList
+    }
+
 }

@@ -3,10 +3,7 @@ package com.ibrahimengin.was.view
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ModeComment
 import androidx.compose.material.icons.outlined.ThumbUp
@@ -25,6 +22,7 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.ibrahimengin.was.R
 import com.ibrahimengin.was.model.PostListItem
 import com.ibrahimengin.was.viewmodel.PostListViewModel
+import com.ibrahimengin.was.viewmodel.ProfilePostListVM
 
 @Composable
 fun PostItemRow(postListItem: PostListItem) {
@@ -66,6 +64,22 @@ fun PostListLazyView(viewModel: PostListViewModel) {
         LazyColumn(contentPadding = PaddingValues(vertical = 5.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
             items(items = list) { post ->
                 PostItemRow(post)
+                Divider()
+            }
+        }
+    }
+}
+
+@Composable
+fun CurrentPostListLazyView(profilePostListVM: ProfilePostListVM) {
+    val isRefreshing by profilePostListVM.isRefreshing.collectAsState()
+    val currentList = profilePostListVM.currentPostList
+    SwipeRefresh(rememberSwipeRefreshState(isRefreshing),
+        onRefresh = { profilePostListVM.refresh(currentList) }) {
+        LazyColumn(contentPadding = PaddingValues(vertical = 5.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+            items(items = currentList) { post ->
+                PostItemRow(post)
+                Divider()
             }
         }
     }

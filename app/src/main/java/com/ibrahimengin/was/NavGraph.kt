@@ -9,6 +9,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.ibrahimengin.was.view.*
 import com.ibrahimengin.was.viewmodel.PostListViewModel
+import com.ibrahimengin.was.viewmodel.ProfilePostListVM
 import com.ibrahimengin.was.viewmodel.SharedViewModel
 
 @Composable
@@ -16,6 +17,7 @@ fun SetupNavGraph(navController: NavHostController) {
 
     val sharedViewModel: SharedViewModel = viewModel()
     val postListViewModel: PostListViewModel = viewModel()
+    val profilePostListVM: ProfilePostListVM = viewModel()
     val currentUser = Firebase.auth.currentUser
     var myStartDestination = ScreenHolder.LoginScreen.route
     if (currentUser != null) {
@@ -56,7 +58,7 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(
             route = ScreenHolder.ProfileScreen.route
         ) {
-            ProfileScreen(navController, postListViewModel)
+            ProfileScreen(navController, postListViewModel, profilePostListVM)
         }
         composable(
             route = ScreenHolder.MessagesScreen.route

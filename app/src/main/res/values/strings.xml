@@ -12,6 +12,7 @@
     <string name="emailAddress">Email Address</string>
     <string name="previous">Previous</string>
     <string name="goBack">Go Back</string>
+    <string name="cancel">Cancel</string>
     <string name="gender">Gender</string>
     <string name="birthday">Birthday</string>
     <string name="next">Next</string>
@@ -27,6 +28,7 @@
     <string name="editProfile">Edit Profile</string>
     <string name="notifications">Notifications</string>
     <string name="successful">Successful!</string>
+    <string name="areYouSureLogOut">Are you sure you want to log out?</string>
     <string name="emailOrPasswordIsIncorrect">Email or password is incorrect!</string>
     <string name="thisEmailIsAlreadyInUse">This email is already in use!</string>
     <string name="thisUsernameIsAlreadyInUse">This username is already in use!</string>

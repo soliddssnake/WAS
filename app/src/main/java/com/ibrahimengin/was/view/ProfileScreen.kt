@@ -1,9 +1,7 @@
 package com.ibrahimengin.was.view
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -17,11 +15,16 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.compose.WASTheme
 import com.ibrahimengin.was.viewmodel.PostListViewModel
+import com.ibrahimengin.was.viewmodel.ProfilePostListVM
 
 @Composable
-fun ProfileScreen(navController: NavController, viewModel: PostListViewModel) {
+fun ProfileScreen(
+    navController: NavController,
+    postViewModel: PostListViewModel,
+    profilePostListVM: ProfilePostListVM
+) {
 
-    val profilePhotoUrl = viewModel.currentProfilePhotoUrl
+    val profilePhotoUrl = postViewModel.currentProfilePhotoUrl
     val pp = rememberAsyncImagePainter(model = profilePhotoUrl)
 
     Scaffold(topBar = {
@@ -33,10 +36,16 @@ fun ProfileScreen(navController: NavController, viewModel: PostListViewModel) {
             Row(modifier = Modifier.padding(top = 8.dp)) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     ProfileImage(pp, 90.dp, 90.dp)
-                    Text(viewModel.currentName + " " + viewModel.currentSurname, style = MaterialTheme.typography.body2)
-                    Text(viewModel.currentUsername, style = MaterialTheme.typography.caption)
+                    Text(
+                        postViewModel.currentName + " " + postViewModel.currentSurname,
+                        style = MaterialTheme.typography.body2
+                    )
+                    Text(postViewModel.currentUsername, style = MaterialTheme.typography.caption)
                 }
             }
+            Spacer(Modifier.height(2.dp))
+            Divider()
+            CurrentPostListLazyView(profilePostListVM)
         }
     }
 }
@@ -45,6 +54,6 @@ fun ProfileScreen(navController: NavController, viewModel: PostListViewModel) {
 @Composable
 fun PreviewProfileScreen() {
     WASTheme {
-        ProfileScreen(rememberNavController(), PostListViewModel())
+        ProfileScreen(rememberNavController(), PostListViewModel(), ProfilePostListVM())
     }
 }

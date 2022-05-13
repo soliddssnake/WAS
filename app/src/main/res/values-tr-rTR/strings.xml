@@ -43,4 +43,6 @@
     <string name="editProfile">Profili Düzenle</string>
     <string name="more">Daha Fazla</string>
     <string name="blankWarning">Bu alan boş bırakılamaz!</string>
+    <string name="cancel">İptal</string>
+    <string name="areYouSureLogOut">Çıkış yapmak istediğine emin misin?</string>
 </resources>
