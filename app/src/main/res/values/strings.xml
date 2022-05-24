@@ -33,6 +33,8 @@
     <string name="thisEmailIsAlreadyInUse">This email is already in use!</string>
     <string name="thisUsernameIsAlreadyInUse">This username is already in use!</string>
     <string name="blankWarning">This field cannot be left blank!</string>
+    <string name="permissionForGallery">Permission needed for gallery</string>
+    <string name="givePermission">Give Permission</string>
 
     <string name="professionalAndSolidarityAssociation">professional and solidarity associations</string>
     <string name="educationalResearchAssociations">educational research associations</string>

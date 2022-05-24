@@ -45,4 +45,6 @@
     <string name="blankWarning">Bu alan boş bırakılamaz!</string>
     <string name="cancel">İptal</string>
     <string name="areYouSureLogOut">Çıkış yapmak istediğine emin misin?</string>
+    <string name="permissionForGallery">Galeri için izin gerekli</string>
+    <string name="givePermission">İzin Ver</string>
 </resources>

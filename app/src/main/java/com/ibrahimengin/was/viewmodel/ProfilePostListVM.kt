@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 class ProfilePostListVM : ViewModel() {
     private var currentUsername = ""
-    var currentPostList = mutableStateListOf<PostListItem>()
+    var myPostList = mutableStateListOf<PostListItem>()
     private val dbPost = Firebase.firestore.collection("posts")
     private val dbUser = Firebase.firestore.collection("users")
     private val _isRefreshing = MutableStateFlow(false)
@@ -51,12 +51,13 @@ class ProfilePostListVM : ViewModel() {
                 currentUsername = it.get("username") as String
                 dbPost.whereEqualTo("username", currentUsername).get().addOnSuccessListener { documents ->
                     for (document in documents) {
-                        val username = document.get("username") as String
-                        val explanation = document.get("explanation") as String
-                        val profilePhotoUrl = document.get("profilePhotoUrl") as String
+                        val myUsername = document.get("username") as String
+                        val myExplanation = document.get("explanation") as String
+                        val myProfilePhotoUrl = document.get("profilePhotoUrl") as String
+                        val myPostPhotoDownloadUrl = document.get("postPhotoDownloadUrl") as String?
 
-                        val post = PostListItem(username, explanation, profilePhotoUrl)
-                        currentPostList.add(post)
+                        val myPost = PostListItem(myUsername, myExplanation, myProfilePhotoUrl, myPostPhotoDownloadUrl)
+                        myPostList.add(myPost)
                     }
                 }
             }
@@ -65,7 +66,7 @@ class ProfilePostListVM : ViewModel() {
 
     private fun getPostListItem(): List<PostListItem> {
         loadPosts()
-        return currentPostList
+        return myPostList
     }
 
 }

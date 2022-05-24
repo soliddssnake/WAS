@@ -58,8 +58,9 @@ class PostListViewModel : ViewModel() {
                 val username = document.get("username") as String
                 val explanation = document.get("explanation") as String
                 val profilePhotoUrl = document.get("profilePhotoUrl") as String
+                val postPhotoDownloadUrl = document.get("postPhotoDownloadUrl") as String?
 
-                val post = PostListItem(username, explanation, profilePhotoUrl)
+                val post = PostListItem(username, explanation, profilePhotoUrl, postPhotoDownloadUrl)
                 postList.add(post)
             }
         }

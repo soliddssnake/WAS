@@ -30,6 +30,7 @@ fun MainScreen() {
             when (navBackStackEntry?.destination?.route) {
                 "add_post_screen" -> {}
                 "login_screen" -> {}
+                "forgot_password_screen" -> {}
                 else -> {
                     BottomBar(navController = navController)
                 }
