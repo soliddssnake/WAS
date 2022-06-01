@@ -31,6 +31,7 @@ fun MainScreen() {
                 "add_post_screen" -> {}
                 "login_screen" -> {}
                 "forgot_password_screen" -> {}
+                "search_user_for_chat_screen" -> {}
                 else -> {
                     BottomBar(navController = navController)
                 }

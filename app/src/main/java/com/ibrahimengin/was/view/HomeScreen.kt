@@ -182,7 +182,7 @@ fun AddPostView(navController: NavController, viewModel: PostListViewModel) {
 
                             } else {
                                 Toast.makeText(context, blankWarning, Toast.LENGTH_LONG).show()
-                            }
+                            }//TODO eğer liste boşsa refresh
 
                         }) {
                             Icon(

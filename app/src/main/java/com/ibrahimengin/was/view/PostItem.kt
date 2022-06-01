@@ -104,5 +104,6 @@ fun CurrentPostListLazyView(profilePostListVM: ProfilePostListVM) {
 @Composable
 fun PreviewPostItem() {
     WASTheme {
+        PostItemRow(PostListItem())
     }
 }
