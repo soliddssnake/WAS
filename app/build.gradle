@@ -79,4 +79,5 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.0.0-rc03")
 
     implementation "com.google.accompanist:accompanist-permissions:0.24.9-beta"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
 }

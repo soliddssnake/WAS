@@ -8,10 +8,7 @@ import androidx.navigation.compose.composable
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.ibrahimengin.was.view.*
-import com.ibrahimengin.was.viewmodel.PostListViewModel
-import com.ibrahimengin.was.viewmodel.ProfilePostListVM
-import com.ibrahimengin.was.viewmodel.SearchUserViewModel
-import com.ibrahimengin.was.viewmodel.SharedViewModel
+import com.ibrahimengin.was.viewmodel.*
 
 @Composable
 fun SetupNavGraph(navController: NavHostController) {
@@ -20,6 +17,7 @@ fun SetupNavGraph(navController: NavHostController) {
     val postListViewModel: PostListViewModel = viewModel()
     val profilePostListVM: ProfilePostListVM = viewModel()
     val searchUserViewModel: SearchUserViewModel = viewModel()
+    val chatViewModel: ChatViewModel = viewModel()
     val currentUser = Firebase.auth.currentUser
     var myStartDestination = ScreenHolder.LoginScreen.route
     if (currentUser != null) {
@@ -80,7 +78,12 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(
             route = ScreenHolder.SearchUserForChatScreen.route
         ) {
-            SearchUserForChatScreen(navController, searchUserViewModel)
+            SearchUserForMessagesScreen(navController, searchUserViewModel, sharedViewModel, chatViewModel)
+        }
+        composable(
+            route = ScreenHolder.ChatScreen.route
+        ) {
+            ChatScreen(sharedViewModel, chatViewModel)
         }
     }
 }

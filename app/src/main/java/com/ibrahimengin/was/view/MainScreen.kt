@@ -28,13 +28,19 @@ fun MainScreen() {
     if (currentUser != null) {
         Scaffold(bottomBar = {
             when (navBackStackEntry?.destination?.route) {
-                "add_post_screen" -> {}
-                "login_screen" -> {}
-                "forgot_password_screen" -> {}
-                "search_user_for_chat_screen" -> {}
-                else -> {
+                "home_screen" -> {
                     BottomBar(navController = navController)
                 }
+                "search_screen" -> {
+                    BottomBar(navController = navController)
+                }
+                "profile_screen" -> {
+                    BottomBar(navController = navController)
+                }
+                "messages_screen" -> {
+                    BottomBar(navController = navController)
+                }
+                else -> {}
             }
 
         }) { innerPadding ->
