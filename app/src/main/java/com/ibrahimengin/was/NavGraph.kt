@@ -53,7 +53,7 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(
             route = ScreenHolder.SearchScreen.route
         ) {
-            SearchScreen()
+            SearchScreen(navController, searchUserViewModel, sharedViewModel, chatViewModel)
         }
         composable(
             route = ScreenHolder.ProfileScreen.route
@@ -84,6 +84,11 @@ fun SetupNavGraph(navController: NavHostController) {
             route = ScreenHolder.ChatScreen.route
         ) {
             ChatScreen(sharedViewModel, chatViewModel)
+        }
+        composable(
+            route = ScreenHolder.ProfileScreenForSearch.route
+        ) {
+            ProfileScreenForSearch(navController, sharedViewModel, postListViewModel)
         }
     }
 }

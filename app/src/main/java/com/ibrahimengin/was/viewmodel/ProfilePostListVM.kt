@@ -2,6 +2,7 @@ package com.ibrahimengin.was.viewmodel
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
@@ -17,6 +18,7 @@ import kotlinx.coroutines.launch
 class ProfilePostListVM : ViewModel() {
     private var currentUsername = ""
     var myPostList = mutableStateListOf<PostListItem>()
+    var userPostList: MutableLiveData<PostListItem>
     private val dbPost = Firebase.firestore.collection("posts")
     private val dbUser = Firebase.firestore.collection("users")
     private val _isRefreshing = MutableStateFlow(false)
@@ -26,6 +28,7 @@ class ProfilePostListVM : ViewModel() {
 
     init {
         loadPosts()
+        userPostList = MutableLiveData()
     }
 
     fun refresh(myList: SnapshotStateList<PostListItem>) {

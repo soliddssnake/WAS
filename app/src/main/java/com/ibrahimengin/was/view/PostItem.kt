@@ -12,6 +12,7 @@ import androidx.compose.material.icons.outlined.ThumbUp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,6 +28,7 @@ import com.ibrahimengin.was.R
 import com.ibrahimengin.was.model.PostListItem
 import com.ibrahimengin.was.viewmodel.PostListViewModel
 import com.ibrahimengin.was.viewmodel.ProfilePostListVM
+import com.ibrahimengin.was.viewmodel.SharedViewModel
 
 @Composable
 fun PostItemRow(postListItem: PostListItem) {
@@ -93,6 +95,22 @@ fun CurrentPostListLazyView(profilePostListVM: ProfilePostListVM) {
         onRefresh = { profilePostListVM.refresh(currentList) }) {
         LazyColumn(contentPadding = PaddingValues(vertical = 5.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
             items(items = currentList) { post ->
+                PostItemRow(post)
+                Divider()
+            }
+        }
+    }
+}
+
+@Composable
+fun SearchedUserPostListLazyView(viewModel: PostListViewModel, accessSVM: SharedViewModel) {
+
+    val list = viewModel.postList.filter { it.username == accessSVM.user!!.username }.toMutableStateList()
+    val isRefreshing by viewModel.isRefreshing.collectAsState()
+    SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing),
+        onRefresh = { viewModel.refresh(list) }) {
+        LazyColumn(contentPadding = PaddingValues(vertical = 5.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+            items(items = list) { post ->
                 PostItemRow(post)
                 Divider()
             }

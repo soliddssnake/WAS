@@ -17,6 +17,7 @@ sealed class ScreenHolder(
     object MainScreen : ScreenHolder(route = "main_screen")
     object ForgotPasswordScreen : ScreenHolder(route = "forgot_password_screen")
     object SearchUserForChatScreen : ScreenHolder(route = "search_user_for_chat_screen")
+    object ProfileScreenForSearch : ScreenHolder(route = "profile_screen_for_search")
     object ChatScreen : ScreenHolder(route = "chat_screen")
 
     //BottomNavigation

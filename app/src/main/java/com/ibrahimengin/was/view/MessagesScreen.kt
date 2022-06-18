@@ -1,5 +1,6 @@
 package com.ibrahimengin.was.view
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
@@ -29,8 +31,6 @@ import com.ibrahimengin.was.model.User
 import com.ibrahimengin.was.viewmodel.ChatViewModel
 import com.ibrahimengin.was.viewmodel.SearchUserViewModel
 import com.ibrahimengin.was.viewmodel.SharedViewModel
-import java.util.*
-import kotlin.streams.toList
 
 
 @Composable
@@ -47,24 +47,26 @@ fun MessagesScreen(navController: NavController) {
 @Composable
 fun ChatScreen(sharedViewModel: SharedViewModel, chatViewModel: ChatViewModel) {
 
-    chatViewModel.addCurrentChat(
-        sharedViewModel.currentUserData!!.chats!!.stream().filter { it.conversationId == chatViewModel.conversationId }
-            .toList()[0]
-    )
     val text = remember { mutableStateOf("") }
     val list = mutableStateListOf<Message>()
-    chatViewModel.currentChat.messages!!.forEach { list.add(it) }
+    val receiver = mutableStateListOf<Message>()
+    //chatViewModel.currentChat.messages!!.forEach { list.add(it) }
+    list.add(Message("Naber?"))
+    list.add(Message("İyi senden?"))
+    list.add(Message("İyi, Haftaya tedavi gören hastalarla etkinlik yapacağız sen de gelmek ister misin?"))
+    list.add(Message("Tabiki isterim"))
+    list.add(Message("Konum ve zamanı ileteceğim."))
+    list.add(Message("Teşekkürler"))
     Scaffold(
         //TODO top bar
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             LazyColumn(
                 modifier = Modifier.weight(weight = 1f, fill = true),
-                contentPadding = PaddingValues(vertical = 2.dp),
-                reverseLayout = true
+                contentPadding = PaddingValues(vertical = 2.dp)
             ) {
                 items(list) { message ->
-                    MessageRow(message)
+                    SenderMessageRow(message)
                 }
             }
             Row(modifier = Modifier.fillMaxWidth()) {
@@ -73,25 +75,12 @@ fun ChatScreen(sharedViewModel: SharedViewModel, chatViewModel: ChatViewModel) {
                     val currentEmail = Firebase.auth.currentUser!!.email!!
                     val accessSVM = sharedViewModel.user!!
                     val messageMap = hashMapOf<String, Any>()
-                    val db = Firebase.firestore.collection("users")
                     val dbChat = Firebase.firestore.collection("chats")
-                    val conversationId = UUID.randomUUID().toString()
                     val timestamp = com.google.firebase.Timestamp.now()
-                    val milliseconds = timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000
                     messageMap["creator"] = currentEmail
                     messageMap["receiver"] = accessSVM.email
                     messageMap["messages"] = accessSVM.email
                     val newMessage = Message(text.value, currentEmail, timestamp)
-
-//                    if (sharedViewModel.currentUserData?.conversations?.isNotEmpty() == true && accessSVM.conversations?.isNotEmpty() == true) {
-//                        for (myConversation in sharedViewModel.currentUserData!!.conversations!!) {
-//                            for (urConversation in accessSVM.conversations) {
-//                                if (myConversation == urConversation){
-//
-//                                }
-//                            }
-//                        }
-//                    }
                     //TODO empty message
                     dbChat.document(chatViewModel.conversationId).update("messages", FieldValue.arrayUnion(newMessage))
                     text.value = ""
@@ -104,9 +93,16 @@ fun ChatScreen(sharedViewModel: SharedViewModel, chatViewModel: ChatViewModel) {
 }
 
 @Composable
-fun MessageRow(message: Message) {
-    Row {
-        Text(message.message)
+fun SenderMessageRow(message: Message) {
+    Box(modifier = Modifier.padding(5.dp).background(Color.Cyan, CircleShape)) {
+        Text(message.message, modifier = Modifier.padding(8.dp))
+    }
+}
+
+@Composable
+fun ReceiverMessageRow(message: Message) {
+    Box(modifier = Modifier.padding(5.dp).background(Color.LightGray, CircleShape)) {
+        Text(message.message, modifier = Modifier.padding(8.dp))
     }
 }
 
@@ -124,7 +120,13 @@ fun SearchUserForMessagesScreen(
             SearchBar(hint = "Search ..", modifier = Modifier.padding(12.dp)) {
                 viewModel.getUsers(it)
             }
-            SearchedUsersListView(navController, viewModel, sharedViewModel, chatViewModel)
+            SearchedUsersListView(
+                navController,
+                viewModel,
+                sharedViewModel,
+                chatViewModel,
+                ScreenHolder.ChatScreen.route
+            )
         }
     }
 }
@@ -134,14 +136,15 @@ fun SearchedUsersListView(
     navController: NavController,
     viewModel: SearchUserViewModel,
     sharedViewModel: SharedViewModel,
-    chatViewModel: ChatViewModel
+    chatViewModel: ChatViewModel,
+    navigationRoute: String
 ) {
 
     val users = remember { viewModel.userList }
 
     LazyColumn(contentPadding = PaddingValues(vertical = 5.dp)) {
         items(users) { user ->
-            SearchUserRow(navController, user, sharedViewModel, chatViewModel)
+            SearchUserRow(navController, user, sharedViewModel, chatViewModel, navigationRoute)
         }
     }
 }
@@ -151,7 +154,8 @@ fun SearchUserRow(
     navController: NavController,
     user: User,
     sharedViewModel: SharedViewModel,
-    chatViewModel: ChatViewModel
+    chatViewModel: ChatViewModel,
+    navigationRoute: String
 ) {
 
     val pp = rememberAsyncImagePainter(model = user.profilePhotoUrl)
@@ -187,7 +191,7 @@ fun SearchUserRow(
 
 
 
-                navController.navigate(ScreenHolder.ChatScreen.route)
+                navController.navigate(navigationRoute)//Chat Screen
             }) {
         ProfileImage(pp, 40.dp, 40.dp)
         Spacer(modifier = Modifier.width(8.dp))
